@@ -1,5 +1,7 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
+
 const authRoutes = require('./routes/authRoutes');
 
 
@@ -7,8 +9,14 @@ const sequelize = require('./config/database');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS','PUT'],
+    credentials: true,
+}));
 app.use(express.json());
+
+
 app.use('/api/auth', authRoutes);
 
 sequelize.sync()
