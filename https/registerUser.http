@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/auth/register-user
+Content-Type: application/json
+
+{
+  "email": "solv7@gmail.com",
+  "password": "1234567",
+  "nombre": "Sol",
+  "dni": "41991328",
+  "celular": "2364310386",
+  "id_rol":2
+}

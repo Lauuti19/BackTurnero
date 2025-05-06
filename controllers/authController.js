@@ -32,6 +32,39 @@ const registerClient = async (req, res) => {
     res.status(500).json({ message: 'Error al registrar el usuario.' });
   }
 };
+
+const registerUser = async (req, res) => {
+    const { email, password, nombre, dni, celular, id_rol } = req.body;
+
+    try {
+        const [user] = await sequelize.query('CALL GetUserByEmail(:email)', {
+        replacements: { email },
+        });
+
+        if (user) {
+        return res.status(400).json({ message: 'El email ya está registrado.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await sequelize.query('CALL RegisterUser(:email, :password, :nombre, :dni, :celular, :id_rol)', {
+        replacements: {
+            email,
+            password: hashedPassword,
+            nombre,
+            dni,
+            celular,
+            id_rol,
+        },
+        });
+
+        res.status(201).json({ message: 'Usuario registrado con éxito.' });
+    } catch (error) {
+        console.error('Error en registro de usuario:', error);
+        res.status(500).json({ message: 'Error al registrar el usuario.' });
+    }
+    };
+
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -74,5 +107,6 @@ const login = async (req, res) => {
 
 module.exports = {
     registerClient,
+    registerUser,
     login
 };
