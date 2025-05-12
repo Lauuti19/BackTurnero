@@ -3,6 +3,7 @@ require('dotenv').config();
 const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
+const classesRoutes = require('./routes/classes');
 
 
 const sequelize = require('./config/database');
@@ -18,6 +19,7 @@ app.use(express.json());
 
 
 app.use('/api/auth', authRoutes);
+app.use('/api/classes', classesRoutes);
 
 sequelize.sync()
     .then(() => {

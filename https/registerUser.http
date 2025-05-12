@@ -2,10 +2,10 @@ POST http://localhost:3001/api/auth/register-user
 Content-Type: application/json
 
 {
-  "email": "solv7@gmail.com",
+  "email": "ivomonti@gmail.com",
   "password": "1234567",
-  "nombre": "Sol",
-  "dni": "41991328",
-  "celular": "2364310386",
-  "id_rol":2
+  "nombre": "Ivo",
+  "dni": "41717495",
+  "celular": "2364600084",
+  "id_rol":1
 }
