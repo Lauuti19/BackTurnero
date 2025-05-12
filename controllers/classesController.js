@@ -44,9 +44,26 @@ const registerToClass = async (req, res) => {
     }
 };
 
+const getUsersByClass = async (req, res) => {
+  const { classId } = req.params;
+
+  try {
+    const results = await sequelize.query('CALL GetUsersByClass(:classId)', {
+      replacements: { classId },
+    });
+
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error fetching users by class:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
     getClassesByUser,
     getAllClasses,
-    registerToClass
+    registerToClass,
+    getUsersByClass
 };
 
