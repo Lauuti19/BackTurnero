@@ -26,8 +26,27 @@ const getAllClasses = async (req, res) => {
     }
 };
 
+const registerToClass = async (req, res) => {
+    const { userId, classId } = req.body;
+
+    try {
+    await sequelize.query('CALL RegisterToClass(:userId, :classId)', {
+        replacements: {
+        userId,
+        classId,
+        },
+    });
+
+    res.status(200).json({ message: 'User successfully registered to class.' });
+    } catch (error) {
+    console.error('Error registering to class:', error);
+    res.status(400).json({ error: error.message });
+    }
+};
+
 module.exports = {
     getClassesByUser,
     getAllClasses,
+    registerToClass
 };
 

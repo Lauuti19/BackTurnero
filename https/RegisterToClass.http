@@ -1,0 +1,8 @@
+# Registrar usuario a una clase
+POST http://localhost:3001/api/classes/register
+Content-Type: application/json
+
+{
+  "userId": 4,
+  "classId": 2
+}
