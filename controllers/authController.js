@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sequelize = require('../config/database');
 
@@ -85,7 +85,7 @@ const login = async (req, res) => {
 
         const token = jwt.sign(
         {
-            id_user: user.id_usuario,
+            id_usuario: user.id_usuario,
             email: user.email,
             id_rol: user.id_rol,
             nombre: user.nombre,

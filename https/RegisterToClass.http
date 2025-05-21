@@ -4,5 +4,6 @@ Content-Type: application/json
 
 {
   "userId": 4,
-  "classId": 2
+  "classId": 10,
+  "fecha": "2025-06-05"
 }
