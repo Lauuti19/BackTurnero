@@ -6,7 +6,6 @@ const getClassesByUser = async (req, res) => {
     if (!userId || !fecha) {
         return res.status(400).json({ error: 'Faltan parámetros: userId y fecha son obligatorios.' });
     }
-
     try {
         const results = await sequelize.query('CALL GetClassesByUser(:userId, :fecha)', {
             replacements: { userId, fecha },
