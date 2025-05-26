@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/payments/registrar-cuota
+Content-Type: application/json
+
+{
+  "fecha_vencimiento": "2023-10-31T00:00:00.000Z",
+  "monto": 1000,
+  "id_usuario": 1
+}

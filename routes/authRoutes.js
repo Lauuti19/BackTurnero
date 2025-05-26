@@ -15,14 +15,14 @@ router.get('/perfil', authenticateToken, (req, res) => {
     const { id_usuario, email, id_rol, nombre, id_estado } = req.user;
 
     res.json({
-    message: 'Perfil del usuario',
-    usuario: {
-        id_usuario,
-        email,
-        nombre,
-        id_rol,
-        id_estado,
-    }
+        message: 'Perfil del usuario',
+        usuario: {
+            id: id_usuario, // <-- agrega este campo
+            email,
+            nombre,
+            id_rol,
+            id_estado,
+        }
     });
 });
 

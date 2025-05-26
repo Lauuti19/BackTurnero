@@ -4,6 +4,9 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
 const classesRoutes = require('./routes/classes');
+const paymentsRoutes = require('./routes/paymentsRoutes');
+const planesRoutes = require('./routes/planesRoutes');
+const usuariosRoutes = require('./routes/usuariosRoutes');
 
 
 const sequelize = require('./config/database');
@@ -20,6 +23,9 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/classes', classesRoutes);
+app.use('/api/payments', paymentsRoutes);
+app.use('/api/planes', planesRoutes);
+app.use('/api/usuarios', usuariosRoutes);
 
 sequelize.sync()
     .then(() => {
