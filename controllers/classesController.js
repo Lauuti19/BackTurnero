@@ -57,10 +57,31 @@ const registerToClass = async (req, res) => {
     });
   }
 
+const getUsersByClass = async (req, res) => {
+    const { classId, fecha } = req.query;
+
+    if (!classId || !fecha) {
+        return res.status(400).json({ error: 'Faltan parámetros: classId y fecha son obligatorios.' });
+    }
+
+    try {
+        // Ajusta la consulta según tu modelo y base de datos
+        const results = await sequelize.query(
+            'CALL GetUsersByClass(:classId, :fecha)', // Debes tener este SP o consulta
+            { replacements: { classId, fecha } }
+        );
+        res.status(200).json(results);
+    } catch (error) {
+        console.error('Error fetching users by class:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 
 
 module.exports = {
     getClassesByUser,
     getAllClasses,
     registerToClass,
+    getUsersByClass,
 };
