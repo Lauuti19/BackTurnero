@@ -56,7 +56,7 @@ const registerToClass = async (req, res) => {
     });
   }
 
-const getUsersByClass = async (req, res) => {
+const getUsersByClassAndDate = async (req, res) => {
     const { classId, fecha } = req.query;
 
     if (!classId || !fecha) {
@@ -64,23 +64,21 @@ const getUsersByClass = async (req, res) => {
     }
 
     try {
-        // Ajusta la consulta según tu modelo y base de datos
-        const results = await sequelize.query(
-            'CALL GetUsersByClass(:classId, :fecha)', // Debes tener este SP o consulta
-            { replacements: { classId, fecha } }
-        );
+        const results = await sequelize.query('CALL GetUsersByClassAndDate(:classId, :fecha)', {
+            replacements: { classId, fecha }
+        });
+
         res.status(200).json(results);
     } catch (error) {
-        console.error('Error fetching users by class:', error);
+        console.error('Error fetching users by class and date:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-
 
 
 module.exports = {
     getClassesByUser,
     getAllClasses,
     registerToClass,
-    getUsersByClass,
+    getUsersByClassAndDate
 };
