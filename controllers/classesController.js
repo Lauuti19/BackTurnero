@@ -6,6 +6,7 @@ const getClassesByUser = async (req, res) => {
     if (!userId || !fecha) {
         return res.status(400).json({ error: 'Faltan parámetros: userId y fecha son obligatorios.' });
     }
+
     try {
         const results = await sequelize.query('CALL GetClassesByUser(:userId, :fecha)', {
             replacements: { userId, fecha },
@@ -41,20 +42,25 @@ const getAllClasses = async (req, res) => {
 
 
 const registerToClass = async (req, res) => {
-    const { userId, classId, fecha } = req.body;
+  const { userId, classId, fecha } = req.body;
 
-    if (!userId || !classId || !fecha) {
-  return res.status(400).json({ error: 'Faltan parámetros: userId, classId y fecha son obligatorios.' });
-}
-
-    await sequelize.query('CALL RegisterToClass(:userId, :classId, :fecha)', {
-        replacements: {
-        userId,
-        classId,
-        fecha
-        },
-    });
+  if (!userId || !classId || !fecha) {
+    return res.status(400).json({ error: 'Faltan parámetros: userId, classId y fecha son obligatorios.' });
   }
+
+  try {
+    await sequelize.query('CALL RegisterToClass(:userId, :classId, :fecha)', {
+      replacements: { userId, classId, fecha },
+    });
+
+    
+    res.status(200).json({ message: 'Usuario registrado correctamente' });
+  } catch (error) {
+    console.error('Error al registrar usuario en la clase:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 
 const getUsersByClassAndDate = async (req, res) => {
     const { classId, fecha } = req.query;
