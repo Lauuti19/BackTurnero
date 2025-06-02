@@ -17,7 +17,6 @@ const getInfoCuotas = async (req, res) => {
   }
 };
 
-// NUEVO: Controlador para registrar cuota
 const registrarCuota = async (req, res) => {
   const {
     id_usuario,
