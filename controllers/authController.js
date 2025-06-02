@@ -46,7 +46,6 @@ const registerUser = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-
         await sequelize.query('CALL RegisterUser(:email, :password, :nombre, :dni, :celular, :id_rol)', {
         replacements: {
             email,
