@@ -1,5 +1,5 @@
-# Registrar usuario a una clase
-POST http://localhost:3001/api/classes/register
+# Desanotar usuario a una clase
+POST http://localhost:3001/api/classes/unregister
 Content-Type: application/json
 
 {
