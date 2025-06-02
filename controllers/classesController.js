@@ -81,10 +81,30 @@ const getUsersByClassAndDate = async (req, res) => {
     }
 };
 
+const unregisterFromClass = async (req, res) => {
+  const { userId, classId, fecha } = req.body;
+
+  if (!userId || !classId || !fecha) {
+    return res.status(400).json({ error: 'Faltan parámetros: userId, classId y fecha son obligatorios.' });
+  }
+
+  try {
+    await sequelize.query('CALL UnregisterFromClass(:userId, :classId, :fecha)', {
+      replacements: { userId, classId, fecha },
+    });
+
+    res.status(200).json({ message: 'Usuario desinscrito correctamente de la clase.' });
+  } catch (error) {
+    console.error('Error al desinscribir usuario de la clase:', error);
+    res.status(500).json({ error: error.original?.sqlMessage || 'Error interno del servidor' });
+  }
+};
+
 
 module.exports = {
     getClassesByUser,
     getAllClasses,
     registerToClass,
-    getUsersByClassAndDate
+    getUsersByClassAndDate,
+    unregisterFromClass
 };
