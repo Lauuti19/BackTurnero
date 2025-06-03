@@ -119,6 +119,25 @@ const createClass = async (req, res) => {
   }
 };
 
+const getClassesByDay = async (req, res) => {
+  const { id_dia } = req.query;
+
+  if (!id_dia) {
+    return res.status(400).json({ error: 'Falta el parámetro id_dia.' });
+  }
+
+  try {
+    const results = await sequelize.query('CALL GetClassesByDay(:id_dia)', {
+      replacements: { id_dia }
+    });
+
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error al obtener clases por día:', error);
+    res.status(500).json({ error: error.original?.sqlMessage || 'Error interno del servidor' });
+  }
+};
+
 
 module.exports = {
     getClassesByUser,
@@ -126,5 +145,6 @@ module.exports = {
     registerToClass,
     getUsersByClassAndDate,
     unregisterFromClass,
-    createClass
+    createClass,
+    getClassesByDay
 };
