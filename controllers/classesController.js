@@ -100,11 +100,31 @@ const unregisterFromClass = async (req, res) => {
   }
 };
 
+const createClass = async (req, res) => {
+  const { id_disciplina, id_dia, hora, capacidad_max } = req.body;
+
+  if (!id_disciplina || !id_dia || !hora || !capacidad_max) {
+    return res.status(400).json({ error: 'Faltan parámetros: id_disciplina, id_dia, hora y capacidad_max son obligatorios.' });
+  }
+
+  try {
+    await sequelize.query('CALL CreateClass(:id_disciplina, :id_dia, :hora, :capacidad_max)', {
+      replacements: { id_disciplina, id_dia, hora, capacidad_max },
+    });
+
+    res.status(201).json({ message: 'Clase creada exitosamente.' });
+  } catch (error) {
+    console.error('Error al crear clase:', error);
+    res.status(500).json({ error: error.original?.sqlMessage || 'Error interno del servidor' });
+  }
+};
+
 
 module.exports = {
     getClassesByUser,
     getAllClasses,
     registerToClass,
     getUsersByClassAndDate,
-    unregisterFromClass
+    unregisterFromClass,
+    createClass
 };

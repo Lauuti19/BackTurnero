@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass} = require('../controllers/classesController');
+const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass} = require('../controllers/classesController');
 
 
 router.get('/all', getAllClasses);
@@ -12,6 +12,8 @@ router.post('/register', registerToClass);
 router.get('/users-by-class', getUsersByClassAndDate),
 
 router.post('/unregister', unregisterFromClass);
+
+router.post('/create', createClass)
 
 
 
