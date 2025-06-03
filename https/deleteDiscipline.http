@@ -1,0 +1,7 @@
+### Delete discipline
+PUT http://localhost:3001/api/disciplinas/delete
+Content-Type: application/json
+
+{
+  "disciplineId": 2
+}

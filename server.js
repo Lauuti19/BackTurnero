@@ -7,6 +7,7 @@ const classesRoutes = require('./routes/classes');
 const paymentsRoutes = require('./routes/paymentsRoutes');
 const planesRoutes = require('./routes/planesRoutes');
 const usuariosRoutes = require('./routes/usuariosRoutes');
+const disciplinasRoutes = require('./routes/disciplinasRoutes');
 
 
 const sequelize = require('./config/database');
@@ -26,6 +27,7 @@ app.use('/api/classes', classesRoutes);
 app.use('/api/payments', paymentsRoutes);
 app.use('/api/planes', planesRoutes);
 app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/disciplinas', disciplinasRoutes);
 
 sequelize.sync()
     .then(() => {

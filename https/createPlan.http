@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/planes/create
+Content-Type: application/json
+
+{
+  "name": "Crossfit 8c",
+  "description": "Dos creditos semanales Crossfit ",
+  "price": 23000,
+  "totalCredits": 8
+}
