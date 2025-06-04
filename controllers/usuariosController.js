@@ -62,6 +62,35 @@ const getUserFullInfo = async (req, res) => {
   }
 };
 
+const updateUserInfo = async (req, res) => {
+  const { id_usuario, nombre, email, dni, celular } = req.body;
+
+  if (!id_usuario) {
+    return res.status(400).json({ error: 'El campo id_usuario es obligatorio.' });
+  }
+
+  try {
+    await sequelize.query(
+      'CALL UpdateUserInfo(:id_usuario, :nombre, :email, :dni, :celular)',
+      {
+        replacements: {
+          id_usuario,
+          nombre: nombre || null,
+          email: email || null,
+          dni: dni || null,
+          celular: celular || null
+        }
+      }
+    );
+
+    res.status(200).json({ mensaje: 'Datos del usuario actualizados correctamente.' });
+  } catch (error) {
+    console.error('Error al actualizar datos del usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+};
 
 
-module.exports = { buscarUsuariosPorNombre, getUserFullInfo };
+
+
+module.exports = { buscarUsuariosPorNombre, getUserFullInfo, updateUserInfo };
