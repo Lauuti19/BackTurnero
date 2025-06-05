@@ -112,8 +112,30 @@ const login = async (req, res) => {
     }
     };
 
+const updatePassword = async (req, res) => {
+  const { id_usuario, nuevaPassword } = req.body;
+
+  try {
+    const hashedPassword = await bcrypt.hash(nuevaPassword, 10);
+
+    await sequelize.query('CALL UpdatePassword(:id_usuario, :p_password_hash)', {
+      replacements: {
+        id_usuario,
+        p_password_hash: hashedPassword,
+      },
+    });
+
+    res.status(200).json({ message: 'Contraseña actualizada con éxito.' });
+  } catch (error) {
+    console.error('Error al actualizar contraseña:', error);
+    res.status(500).json({ message: 'Error al actualizar la contraseña.' });
+  }
+};
+
+
 module.exports = {
     registerClient,
     registerUser,
-    login
+    login,
+    updatePassword
 };

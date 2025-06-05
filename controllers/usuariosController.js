@@ -7,6 +7,7 @@ const buscarUsuariosPorNombre = async (req, res) => {
       replacements: { nombre }
     });
     console.log('Usuarios encontrados:', usuarios);
+    res.json(usuarios);
   } catch (error) {
     console.error('Error al buscar usuarios:', error);
     res.status(500).json({ error: 'Error interno del servidor.' });

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerClient, login,registerUser } = require('../controllers/authController');
+const { registerClient, login,registerUser, updatePassword } = require('../controllers/authController');
 const { authenticateToken } = require('../middlewares/authenticateToken');
 
 
@@ -17,7 +17,7 @@ router.get('/perfil', authenticateToken, (req, res) => {
     res.json({
         message: 'Perfil del usuario',
         usuario: {
-            id: id_usuario, // <-- agrega este campo
+            id: id_usuario, 
             email,
             nombre,
             id_rol,
@@ -25,5 +25,8 @@ router.get('/perfil', authenticateToken, (req, res) => {
         }
     });
 });
+
+router.put('/update-password', updatePassword);
+
 
 module.exports = router;
