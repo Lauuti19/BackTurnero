@@ -138,6 +138,53 @@ const getClassesByDay = async (req, res) => {
   }
 };
 
+const updateClass = async (req, res) => {
+  const { id_clase, id_disciplina, id_dia, hora, capacidad_max } = req.body;
+
+  if (!id_clase) {
+    return res.status(400).json({ error: 'El parámetro id_clase es obligatorio.' });
+  }
+
+  try {
+    await sequelize.query(
+      'CALL UpdateClasses(:id_clase, :id_disciplina, :id_dia, :hora, :capacidad_max)',
+      {
+        replacements: {
+          id_clase,
+          id_disciplina: id_disciplina ?? null,
+          id_dia: id_dia ?? null,
+          hora: hora ?? null,
+          capacidad_max: capacidad_max ?? null
+        }
+      }
+    );
+
+    res.status(200).json({ message: 'Clase actualizada correctamente.' });
+  } catch (error) {
+    console.error('Error al modificar clase:', error);
+    res.status(500).json({ error: error.original?.sqlMessage || 'Error interno del servidor' });
+  }
+};
+
+const deleteClass = async (req, res) => {
+  const { classId } = req.body;
+
+  if (!classId) {
+    return res.status(400).json({ error: 'Missing classId parameter.' });
+  }
+
+  try {
+    await sequelize.query('CALL DeleteClass(:classId)', {
+      replacements: { classId }
+    });
+
+    res.status(200).json({ message: 'Class logically deleted.' });
+  } catch (error) {
+    console.error('Error logically deleting class:', error);
+    res.status(500).json({ error: error.original?.sqlMessage || 'Internal server error' });
+  }
+};
+
 
 module.exports = {
     getClassesByUser,
@@ -146,5 +193,7 @@ module.exports = {
     getUsersByClassAndDate,
     unregisterFromClass,
     createClass,
-    getClassesByDay
+    getClassesByDay,
+    updateClass, 
+    deleteClass
 };
