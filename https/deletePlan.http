@@ -3,5 +3,5 @@ PUT http://localhost:3001/api/planes/delete
 Content-Type: application/json
 
 {
-  "planId": 1
+  "planId": 3
 }
