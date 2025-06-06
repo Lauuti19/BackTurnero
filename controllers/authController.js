@@ -6,13 +6,16 @@ const registerClient = async (req, res) => {
   const { email, password, nombre, dni, celular } = req.body;
 
   try {
-    const [user] = await sequelize.query('CALL GetUserByEmail(:email)', {
-      replacements: { email },
-    });
+    const users = await sequelize.query('CALL GetUserByEmail(:email)', {
+  replacements: { email },
+});
 
-    if (user) {
-      return res.status(400).json({ message: 'El email ya está registrado.' });
-    }
+const user = users[0]; // Si devuelve una fila
+
+
+    if (!user) {
+  return res.status(400).json({ message: 'Email o contraseña incorrectos.' });
+}
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -31,6 +34,7 @@ const registerClient = async (req, res) => {
     console.error('Error en registro:', error);
     res.status(500).json({ message: 'Error al registrar el usuario.' });
   }
+  console.log("Datos recibidos en register:", req.body);
 };
 
 const registerUser = async (req, res) => {
