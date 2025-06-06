@@ -2,8 +2,9 @@ POST http://localhost:3001/api/planes/create
 Content-Type: application/json
 
 {
-  "name": "Crossfit 8c",
-  "description": "Dos creditos semanales Crossfit ",
-  "price": 23000,
-  "totalCredits": 8
+  "name": "Crossfit Semanal",
+  "description": "6 Creditos Semanales para crossfit",
+  "price": 30000,
+  "totalCredits": 16,
+  "disciplines": [1]
 }

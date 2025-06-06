@@ -29,23 +29,36 @@ const deletePlan = async (req, res) => {
 };
 
 const createPlan = async (req, res) => {
-  const { name, description, price, totalCredits } = req.body;
+  const { name, description, price, totalCredits, disciplines } = req.body;
 
-  if (!name || !description || !price || !totalCredits) {
-    return res.status(400).json({ error: 'Missing required plan parameters.' });
+  if (!name || !description || !price || !totalCredits || !Array.isArray(disciplines) || disciplines.length === 0) {
+    return res.status(400).json({ error: 'Missing required plan parameters or disciplines.' });
   }
 
-  try {
-    await sequelize.query('CALL CreatePlan(:name, :description, :price, :totalCredits)', {
-      replacements: { name, description, price, totalCredits }
-    });
+  // Convertimos el array de disciplinas a string separado por comas
+  const disciplineIds = disciplines.join(',');
 
-    res.status(201).json({ message: 'Plan created successfully.' });
+  try {
+    await sequelize.query(
+      'CALL CreatePlan(:name, :description, :price, :totalCredits, :disciplineIds)',
+      {
+        replacements: {
+          name,
+          description,
+          price,
+          totalCredits,
+          disciplineIds
+        }
+      }
+    );
+
+    res.status(201).json({ message: 'Plan created successfully with associated disciplines.' });
   } catch (error) {
     console.error('Error creating plan:', error);
     res.status(500).json({ error: error.original?.sqlMessage || 'Internal server error' });
   }
 };
+
 
 
 const updatePlan = async (req, res) => {
