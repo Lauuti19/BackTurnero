@@ -17,7 +17,7 @@ const deletePlan = async (req, res) => {
   }
 
   try {
-    await sequelize.query('CALL EliminarPlanLogicamente(:planId)', {
+    await sequelize.query('CALL DeletePlan(:planId)', {
       replacements: { planId }
     });
 
@@ -35,7 +35,6 @@ const createPlan = async (req, res) => {
     return res.status(400).json({ error: 'Missing required plan parameters or disciplines.' });
   }
 
-  // Convertimos el array de disciplinas a string separado por comas
   const disciplineIds = disciplines.join(',');
 
   try {
