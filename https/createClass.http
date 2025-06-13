@@ -1,9 +1,0 @@
-POST http://localhost:3001/api/classes/create
-Content-Type: application/json
-
-{
-  "id_disciplina": 3,
-  "id_dia": 2,
-  "hora": "14:00:00",
-  "capacidad_max": 25
-}

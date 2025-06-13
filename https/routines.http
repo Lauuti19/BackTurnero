@@ -1,0 +1,110 @@
+### ✅ Crear una rutina con ejercicios
+POST http://localhost:3001/api/routines/create
+Content-Type: application/json
+
+{
+  "userId": 10,
+  "routineName": "Pecho y Triceps",
+  "exercises": [
+    {
+      "id_ejercicio": 1,
+      "dia": 1,
+      "orden": 1,
+      "rondas": 4,
+      "repeticiones": "10"
+    },
+    {
+      "id_ejercicio": 2,
+      "dia": 1,
+      "orden": 2,
+      "rondas": 3,
+      "repeticiones": "12"
+    }
+  ]
+}
+
+###
+
+### 🔍 Obtener todas las rutinas de un usuario por ID
+GET http://localhost:3001/api/routines/user/4
+Content-Type: application/json
+
+###
+
+### 🔍 Buscar rutinas por nombre del usuario
+GET http://localhost:3001/api/routines/search?name=lau
+Content-Type: application/json
+
+
+### ✅ Solo actualizar el nombre de la rutina
+PUT http://localhost:3001/api/routines/update
+Content-Type: application/json
+
+{
+  "id_rutina": 2,
+  "routineName": "Pierna + Cuadriceps"
+}
+
+###
+
+### Solo actualizar los ejercicios (reemplaza todos)
+PUT http://localhost:3001/api/routines/update
+Content-Type: application/json
+
+{
+  "id_rutina": 2,
+  "exercises": [
+    {
+      "id_ejercicio": 4,
+      "dia": 2,
+      "orden": 1,
+      "rondas": 4,
+      "repeticiones": "10"
+    },
+    {
+      "id_ejercicio": 6,
+      "dia": 2,
+      "orden": 2,
+      "rondas": 3,
+      "repeticiones": "12"
+    }
+  ]
+}
+
+###
+
+### ✅ Actualizar nombre y ejercicios
+PUT http://localhost:3001/api/routines/update
+Content-Type: application/json
+
+{
+  "id_rutina": 2,
+  "routineName": "Piernas / cuadriceps",
+  "exercises": [
+    {
+      "id_ejercicio": 3,
+      "dia": 3,
+      "orden": 1,
+      "rondas": 5,
+      "repeticiones": "8"
+    },
+    {
+      "id_ejercicio": 5,
+      "dia": 3,
+      "orden": 2,
+      "rondas": 4,
+      "repeticiones": "10"
+    }
+  ]
+}
+
+
+
+
+###  Eliminar rutina 
+PUT http://localhost:3001/api/routines/delete
+Content-Type: application/json
+
+{
+  "id_rutina": 2
+}

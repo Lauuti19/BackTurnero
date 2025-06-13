@@ -1,9 +1,0 @@
-# Desanotar usuario a una clase
-POST http://localhost:3001/api/classes/unregister
-Content-Type: application/json
-
-{
-  "userId": 4,
-  "classId": 10,
-  "fecha": "2025-06-06"
-}

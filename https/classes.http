@@ -1,0 +1,54 @@
+###create class
+POST http://localhost:3001/api/classes/create
+Content-Type: application/json
+
+{
+  "id_disciplina": 3,
+  "id_dia": 2,
+  "hora": "14:00:00",
+  "capacidad_max": 25
+}
+
+
+###delete class
+PUT http://localhost:3001/api/classes/delete
+Content-Type: application/json
+
+{
+  "classId": 1
+}
+
+###registertoClass
+
+POST http://localhost:3001/api/classes/register
+Content-Type: application/json
+
+{
+  "userId": 4,
+  "classId": 10,
+  "fecha": "2025-06-06"
+}
+
+
+# Desanotar usuario a una clase
+POST http://localhost:3001/api/classes/unregister
+Content-Type: application/json
+
+{
+  "userId": 4,
+  "classId": 10,
+  "fecha": "2025-06-06"
+}
+
+#update class
+PUT http://localhost:3001/api/classes/update
+Content-Type: application/json
+
+{
+  "id_clase": 1,
+  "hora": "19:00:00",
+  "capacidad_max": 25,
+  "id_disciplina": 2,
+  "id_dia": 6
+
+}

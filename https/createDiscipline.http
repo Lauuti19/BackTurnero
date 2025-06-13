@@ -1,6 +1,0 @@
-POST http://localhost:3001/api/disciplinas/create
-Content-Type: application/json
-
-{
-  "name": "Yoga"
-}

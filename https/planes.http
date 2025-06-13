@@ -1,0 +1,31 @@
+#crear plan 
+POST http://localhost:3001/api/planes/create
+Content-Type: application/json
+
+{
+  "name": "Crossfit Semanal",
+  "description": "6 Creditos Semanales para crossfit",
+  "price": 30000,
+  "totalCredits": 16,
+  "disciplines": [1]
+}
+
+### Delete plan 
+PUT http://localhost:3001/api/planes/delete
+Content-Type: application/json
+
+{
+  "planId": 3
+}
+
+#update plan
+PUT http://localhost:3001/api/planes/update
+Content-Type: application/json
+
+{
+  "planId": 1,
+  "name": "Crossfit 12 C",
+  "description": "3 creditos semanales Crossfit",
+  "price": 25000,
+  "totalCredits": 12
+}

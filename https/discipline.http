@@ -1,3 +1,11 @@
+#create discpline
+POST http://localhost:3001/api/disciplinas/create
+Content-Type: application/json
+
+{
+  "name": "Yoga"
+}
+
 ### Delete discipline
 PUT http://localhost:3001/api/disciplinas/delete
 Content-Type: application/json
