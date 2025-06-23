@@ -43,3 +43,7 @@ Content-Type: application/json
   "dni": "46999888",
   "celular": "1133445566"
 }
+
+##### Get user full info
+GET http://localhost:3001/api/usuarios/4
+Content-Type: application/json

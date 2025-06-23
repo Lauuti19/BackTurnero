@@ -10,6 +10,7 @@ const usuariosRoutes = require('./routes/usuariosRoutes');
 const disciplinasRoutes = require('./routes/disciplinasRoutes');
 const exercisesRoutes = require('./routes/exercisesRoutes');
 const routinesRoutes = require('./routes/routinesRoutes');
+const rmRoutes = require('./routes/rmRoutes');
 
 
 const sequelize = require('./config/database');
@@ -32,6 +33,7 @@ app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/disciplinas', disciplinasRoutes);
 app.use('/api/exercises', exercisesRoutes);
 app.use('/api/routines', routinesRoutes);
+app.use('/api/rm', rmRoutes);
 
 
 sequelize.sync()

@@ -1,0 +1,40 @@
+### Registrar 1RM 
+POST http://localhost:3001/api/rm
+Content-Type: application/json
+
+{
+  "id_usuario": 4,
+  "id_ejercicio": 1,
+  "peso": 100.0,
+  "repeticiones": 1,
+  "notas": "Máximo personal"
+}
+
+### Registrar 3RM para el mismo usuario y ejercicio
+POST http://localhost:3001/api/rm
+Content-Type: application/json
+
+{
+  "id_usuario": 4,
+  "id_ejercicio": 1,
+  "peso": 70.0,
+  "repeticiones": 3,
+  "notas": "Técnica perfecta"
+}
+
+### Actualizar el 3RM
+PUT http://localhost:3001/api/rm/update
+Content-Type: application/json
+
+{
+  "id_usuario": 4,
+  "id_ejercicio": 1,
+  "repeticiones": 3,
+  "nuevo_peso": 72.5,
+  "nuevas_notas": "Mejoró en 2.5kg"
+}
+
+### Obtener todos los RMs del usuario 
+GET http://localhost:3001/api/rm/user/4
+Content-Type: application/json
+
