@@ -1,0 +1,40 @@
+### Get all active exercises
+GET http://localhost:3001/api/exercises
+Content-Type: application/json
+
+###
+
+### Search exercises by name
+GET http://localhost:3001/api/exercises/search?name=Peso
+Content-Type: application/json
+
+###
+
+### Create a new exercise
+POST http://localhost:3001/api/exercises/create
+Content-Type: application/json
+
+{
+  "name": "Plancha Abdominal",
+  "link": "https://youtu.be/hAqEhJb9oDs?si=PJjKlMB7buuR2XGI"
+}
+
+### Update an existing exercise
+PUT http://localhost:3001/api/exercises/update
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Air Squat",
+  "link": null
+}
+
+###
+
+### delete an exercise
+PUT http://localhost:3001/api/exercises/delete
+Content-Type: application/json
+
+{
+  "id": 2
+}

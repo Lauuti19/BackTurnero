@@ -1,6 +1,0 @@
-PUT http://localhost:3001/api/classes/delete
-Content-Type: application/json
-
-{
-  "classId": 1
-}

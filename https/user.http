@@ -1,0 +1,45 @@
+#register
+POST http://localhost:3001/api/auth/register-user
+Content-Type: application/json
+
+{
+  "email": "ivomonti@gmail.com",
+  "password": "1234567",
+  "nombre": "Ivo",
+  "dni": "41717495",
+  "celular": "2364600084",
+  "id_rol":1
+}
+
+### Cambiar contraseña del usuario
+PUT http://localhost:3001/api/auth/update-password
+Content-Type: application/json
+
+{
+  "id_usuario": 4,
+  "nuevaPassword": "1234567"
+}
+
+### Actualizar datos de un usuario
+PUT http://localhost:3001/api/usuarios/update
+Content-Type: application/json
+
+{
+  "id_usuario": 4,
+  "nombre": "Lautaro B.",
+  "email": "lauti_b@example.com",
+  "dni": "47000000",
+  "celular": "1133440000"
+}
+
+#registrar usuario
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "lau@example.com",
+  "password": "1234567",
+  "nombre": "Lauti",
+  "dni": "46999888",
+  "celular": "1133445566"
+}
