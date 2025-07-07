@@ -137,7 +137,24 @@ const getClassesByDay = async (req, res) => {
     res.status(500).json({ error: error.original?.sqlMessage || 'Error interno del servidor' });
   }
 };
+const getClassesByUserNoCredits = async (req, res) => {
+    const { userId, fecha } = req.query; 
 
+    if (!userId || !fecha) {
+        return res.status(400).json({ error: 'Faltan parámetros: userId y fecha son obligatorios.' });
+    }
+
+    try {
+        const results = await sequelize.query('CALL GetClassesByUserNoCredits(:userId, :fecha)', {
+            replacements: { userId, fecha },
+        });
+
+        res.status(200).json(results);
+    } catch (error) {
+        console.error('Error fetching classes by user plan (no credits):', error);
+        res.status(500).json({ error: error.original?.sqlMessage || 'Internal server error' });
+    }
+};
 const updateClass = async (req, res) => {
   const { id_clase, id_disciplina, id_dia, hora, capacidad_max } = req.body;
 
@@ -191,6 +208,7 @@ module.exports = {
     getAllClasses,
     registerToClass,
     getUsersByClassAndDate,
+    getClassesByUserNoCredits,
     unregisterFromClass,
     createClass,
     getClassesByDay,
