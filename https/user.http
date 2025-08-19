@@ -47,3 +47,8 @@ Content-Type: application/json
 ##### Get user full info
 GET http://localhost:3001/api/usuarios/4
 Content-Type: application/json
+
+###buscar usuario 
+GET http://localhost:3001/api/usuarios/buscar?nombre=lau
+Content-Type: application/json
+

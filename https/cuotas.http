@@ -1,8 +1,37 @@
-POST http://localhost:3001/api/payments/registrar-cuota
+### 🔹 Obtener cuotas activas de un usuario
+GET http://localhost:3001/api/payments/active-fees?id_usuario=6
+Content-Type: application/json
+
+
+### 🔹 Registrar nueva cuota (usa créditos y monto del plan automáticamente)
+POST http://localhost:3001/api/payments/register-fee
 Content-Type: application/json
 
 {
-  "fecha_vencimiento": "2023-10-31T00:00:00.000Z",
-  "monto": 1000,
-  "id_usuario": 1
+  "id_usuario": 9,
+  "id_plan": 4,
+  "metodo_pago": "efectivo",
+  "pagado": true
+}
+
+
+### 🔹 Registrar nueva cuota pero dejarla pendiente (sin pagar)
+POST http://localhost:3001/api/payments/register-fee
+Content-Type: application/json
+
+{
+  "id_usuario": 6,
+  "id_plan": 1,
+  "metodo_pago": "transferencia",
+  "pagado": false
+}
+
+
+### 🔹 Pagar una cuota pendiente
+POST http://localhost:3001/api/payments/pay-fee
+Content-Type: application/json
+
+{
+  "id_cuota": 6,
+  "metodo_pago": "efectivo"
 }
