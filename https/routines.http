@@ -3,20 +3,20 @@ POST http://localhost:3001/api/routines/create
 Content-Type: application/json
 
 {
-  "userId": 10,
+  "userId": 4,
   "routineName": "Pecho y Triceps",
   "exercises": [
     {
       "id_ejercicio": 1,
       "dia": 1,
-      "orden": 1,
+      "orden": 3,
       "rondas": 4,
       "repeticiones": "10"
     },
     {
       "id_ejercicio": 2,
       "dia": 1,
-      "orden": 2,
+      "orden": 4,
       "rondas": 3,
       "repeticiones": "12"
     }

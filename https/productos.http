@@ -1,0 +1,48 @@
+### Crear producto
+POST http://localhost:3001/api/products/create
+Content-Type: application/json
+
+{
+  "nombre": "Powerade Frutos Rojos",
+  "descripcion": "Bebida isotónica",
+  "precio": 3000,
+  "stock": 20
+}
+
+
+### Obtener productos
+GET http://localhost:3001/api/products/list
+
+
+
+### Eliminar producto
+DELETE http://localhost:3001/api/products/delete/1
+
+### Actualizar solo el precio
+PUT http://localhost:3001/api/products/update
+Content-Type: application/json
+
+{
+  "id_producto": 2,
+  "precio": 2000
+}
+
+### Actualizar precio y stock
+PUT http://localhost:3001/api/products/update
+Content-Type: application/json
+
+{
+  "id_producto": 1,
+  "precio": 18000,
+  "stock": 50
+}
+
+### Actualizar nombre y descripción
+PUT http://localhost:3001/api/products/update
+Content-Type: application/json
+
+{
+  "id_producto": 1,
+  "nombre": "Creatina Monohidratada",
+  "descripcion": "Creatina de alta pureza"
+}

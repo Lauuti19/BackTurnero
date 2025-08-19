@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getInfoCuotas, registrarCuotaPorNombre } = require('../controllers/paymentsController');
+const { getActiveFees, registerFee, payFee } = require('../controllers/paymentsController');
 
-router.get('/info-cuotas', getInfoCuotas);
-router.post('/registrar-cuota', registrarCuotaPorNombre);
+router.get('/active-fees', getActiveFees);       
+router.post('/register-fee', registerFee);      
+router.post('/pay-fee', payFee);                
 
 module.exports = router;

@@ -1,0 +1,28 @@
+### Get all cash movements
+GET http://localhost:3001/api/cash-movements/all
+Content-Type: application/json
+
+
+### Get cash movements by date range
+GET http://localhost:3001/api/cash-movements/by-date-range?start_date=2025-08-01&end_date=2025-08-19
+Content-Type: application/json
+
+
+### Get today's cash movements
+GET http://localhost:3001/api/cash-movements/today
+Content-Type: application/json
+
+### Register new cash movement
+POST http://localhost:3001/api/cash-movements/register
+Content-Type: application/json
+
+{
+  "type": "Ingreso",
+  "payment_method": "Efectivo",
+  "user_id": 6,
+  "concept": "Venta de productos",
+  "details": [
+    { "id_producto": 1, "cantidad": 1 },
+    { "id_producto": 2, "cantidad": 1 }
+  ]
+}

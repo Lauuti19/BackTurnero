@@ -11,6 +11,8 @@ const disciplinasRoutes = require('./routes/disciplinasRoutes');
 const exercisesRoutes = require('./routes/exercisesRoutes');
 const routinesRoutes = require('./routes/routinesRoutes');
 const rmRoutes = require('./routes/rmRoutes');
+const productsRoutes = require('./routes/productsRoutes')
+const cashMovementsRoutes = require('./routes/cashMovementsRoutes')
 
 
 const sequelize = require('./config/database');
@@ -34,6 +36,9 @@ app.use('/api/disciplinas', disciplinasRoutes);
 app.use('/api/exercises', exercisesRoutes);
 app.use('/api/routines', routinesRoutes);
 app.use('/api/rm', rmRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/cash-movements', cashMovementsRoutes);
+
 
 
 sequelize.sync()
