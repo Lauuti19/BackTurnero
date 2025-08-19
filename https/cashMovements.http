@@ -1,19 +1,20 @@
 ### Get all cash movements
 GET http://localhost:3001/api/cash-movements/all
+Authorization: Bearer 
 Content-Type: application/json
 
 
 ### Get cash movements by date range
 GET http://localhost:3001/api/cash-movements/by-date-range?start_date=2025-08-01&end_date=2025-08-19
-Content-Type: application/json
-
+Authorization: Bearer 
 
 ### Get today's cash movements
 GET http://localhost:3001/api/cash-movements/today
-Content-Type: application/json
+Authorization: Bearer 
 
-### Register new cash movement
+#registrar movimientos
 POST http://localhost:3001/api/cash-movements/register
+Authorization: Bearer 
 Content-Type: application/json
 
 {
@@ -26,3 +27,22 @@ Content-Type: application/json
     { "id_producto": 2, "cantidad": 1 }
   ]
 }
+
+
+###  Obtener resumen de hoy (solo admins)
+GET http://localhost:3001/api/cash-movements/summary/today
+Authorization: Bearer 
+
+###
+
+###  Obtener efectivo disponible (profes + admins)
+GET http://localhost:3001/api/cash-movements/summary/efectivo
+Authorization: Bearer 
+Content-Type: application/json
+
+###
+
+###  Obtener resumen por método de pago (solo admins)
+GET http://localhost:3001/api/cash-movements/summary/by-payment
+Authorization: Bearer 
+Content-Type: application/json

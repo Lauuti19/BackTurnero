@@ -1,8 +1,17 @@
+##admin
 POST http://localhost:3001/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "lau@example.com",
+  "email": "ivomonti1@gmail.com",
   "password": "1234567"
 }
 
+###profe
+POST http://localhost:3001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "solsv7@gmail.com",
+  "password": "1234567"
+}

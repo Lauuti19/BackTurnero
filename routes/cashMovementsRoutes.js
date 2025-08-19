@@ -1,16 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const { 
-  getAllCashMovements, 
-  getCashMovementsByDateRange, 
+  registerCashMovement,
+  getAllCashMovements,
+  getCashMovementsByDateRange,
   getTodayCashMovements,
-  registerCashMovement
-
+  getTodayCashSummary,
+  getCashEfectivoDisponible,
+  getCashSummaryByPaymentMethod
 } = require('../controllers/cashMovementsController');
 
-router.get('/all', getAllCashMovements);                   
-router.get('/by-date-range', getCashMovementsByDateRange); 
-router.get('/today', getTodayCashMovements);               
-router.post('/register', registerCashMovement);            
+const { authorizeRole } = require('../middlewares/authMiddleware');
+const { authenticateToken } = require('../middlewares/authenticateToken');
+
+router.get('/all', authenticateToken, authorizeRole(['admin','profesor']), getAllCashMovements);                   
+router.get('/by-date-range', authenticateToken, authorizeRole(['admin','profesor']), getCashMovementsByDateRange); 
+router.get('/today', authenticateToken, authorizeRole(['admin','profesor']), getTodayCashMovements);               
+router.post('/register', authenticateToken, authorizeRole(['admin', 'profesor']), registerCashMovement);         
+
+// Resúmenes
+router.get('/summary/today', authenticateToken, authorizeRole(['admin']), getTodayCashSummary);             
+router.get('/summary/efectivo', authenticateToken, authorizeRole(['profesor','admin']), getCashEfectivoDisponible); 
+router.get('/summary/by-payment', authenticateToken, authorizeRole(['admin']), getCashSummaryByPaymentMethod);    
 
 module.exports = router;
