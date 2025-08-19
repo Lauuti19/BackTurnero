@@ -61,4 +61,44 @@ const registerCashMovement = async (req, res) => {
   }
 };
 
-module.exports = { registerCashMovement, getAllCashMovements, getCashMovementsByDateRange, getTodayCashMovements };
+// Requiere sequelize ya configurado (como tenés)
+const getTodayCashSummary = async (req, res) => {
+  try {
+    const [summary] = await sequelize.query('CALL GetTodayCashSummary()');
+    res.json({ summary });
+  } catch (error) {
+    console.error('Error getting today summary:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
+const getCashEfectivoDisponible = async (req, res) => {
+  try {
+    const [row] = await sequelize.query('CALL GetCashEfectivoDisponible()');    const efectivo = row && (row.efectivo_disponible ?? (Array.isArray(row) ? row[0]?.efectivo_disponible : 0));
+    res.json({ efectivo: efectivo ?? 0 });
+  } catch (error) {
+    console.error('Error getting efectivo disponible:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
+const getCashSummaryByPaymentMethod = async (req, res) => {
+  try {
+    const summary = await sequelize.query('CALL GetCashSummaryByPaymentMethod()');
+    res.json({ summary });
+  } catch (error) {
+    console.error('Error getting summary by payment method:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
+module.exports = {
+  registerCashMovement,
+  getAllCashMovements,
+  getCashMovementsByDateRange,
+  getTodayCashMovements,
+  getTodayCashSummary,
+  getCashEfectivoDisponible,
+  getCashSummaryByPaymentMethod
+};
+
