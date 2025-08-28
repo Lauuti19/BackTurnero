@@ -1,0 +1,83 @@
+### Crear horas pactadas
+POST http://localhost:3001/api/workhours/create
+Content-Type: application/json
+
+{
+  "user_id": 9,
+  "work_hours": 40,
+  "rate": 6500
+}
+
+### Listar horas pactadas 
+GET http://localhost:3001/api/workhours/list
+
+### Listar horas pactadas (por usuario)
+GET http://localhost:3001/api/workhours/list?user_id=6
+
+### Registrar check-in
+POST http://localhost:3001/api/workhours/checkin
+Content-Type: application/json
+
+{
+  "id_usuario": 9,
+  "fecha": "2025-08-26",
+  "hora": "13:00:00"
+}
+
+### Registrar check-out
+POST http://localhost:3001/api/workhours/checkout
+Content-Type: application/json
+
+{
+  "id_usuario": 9,
+  "fecha": "2025-08-26",
+  "hora": "21:00:00"
+}
+
+### Soft delete work hours
+DELETE http://localhost:3001/api/workhours/delete/1
+
+### Update work hours
+PUT http://localhost:3001/api/workhours/update
+Content-Type: application/json
+
+{
+  "id_pactado": 1,
+  "work_hours": 45,
+  "rate": 7800
+}
+
+### Horas trabajadas por periodo (YYYY-MM)
+
+GET http://localhost:3001/api/workhours/worked-hours?id_usuario=6&periodo=2025-08
+
+### Horas trabajadas por rango de fechas
+GET http://localhost:3001/api/workhours/worked-hours-range?id_usuario=6&desde=2025-08-01&hasta=2025-08-31
+
+### Asistencias de profes por rango
+GET http://localhost:3001/api/workhours/asistencias?desde=2025-08-01&hasta=2025-08-31
+
+### Asistencias de profes por periodo
+GET http://localhost:3001/api/workhours/asistencias?periodo=2025-08
+
+### Horas trabajadas de profes por rango
+GET http://localhost:3001/api/workhours/horas-profes?desde=2025-08-01&hasta=2025-08-31
+
+### Horas trabajadas de profes por periodo
+GET http://localhost:3001/api/workhours/horas-profes?periodo=2025-08
+### Pre-liquidación de profesor
+GET http://localhost:3001/api/workhours/pre-liquidacion?id_usuario=9&periodo=2025-08
+
+### Liquidar profesor 
+POST http://localhost:3001/api/workhours/liquidar
+Content-Type: application/json
+
+{
+  "id_usuario": 6,
+  "periodo": "2025-08",
+  "horas_pagadas": 16
+}
+
+### Liquidaciones por rango
+GET http://localhost:3001/api/workhours/liquidaciones?desde=2025-08-01&hasta=2025-08-31
+Content-Type: application/json
