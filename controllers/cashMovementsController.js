@@ -24,7 +24,7 @@ const getCashMovementsByDateRange = async (req, res) => {
       'CALL GetCashMovementsByDateRange(:start_date, :end_date)',
       { replacements: { start_date, end_date } }
     );
-    res.json({ movements });
+    res.json({ movements: Array.isArray(movements) ? movements : [] });
   } catch (error) {
     console.error('Error getting cash movements by date range:', error);
     res.status(500).json({ error: 'Internal server error.' });
@@ -43,23 +43,34 @@ const getTodayCashMovements = async (req, res) => {
 };
 
 const registerCashMovement = async (req, res) => {
-  const { type, payment_method, user_id, concept, details } = req.body;
+  const { type, payment_method, user_id, concept, details, paid } = req.body;
 
-  if (!type || !payment_method || !user_id || !concept || !details) {
+  if (!type || !payment_method || !user_id || !concept || !details || paid === undefined) {
     return res.status(400).json({ error: 'Missing required parameters.' });
   }
 
   try {
     await sequelize.query(
-      'CALL RegisterCajaMovimiento(:type, :payment_method, :user_id, :concept, :details)',
-      { replacements: { type, payment_method, user_id, concept, details: JSON.stringify(details) } }
+      'CALL RegisterCajaMovimiento(:type, :payment_method, :user_id, :concept, :details, :paid)',
+      {
+        replacements: {
+          type,
+          payment_method,
+          user_id,
+          concept,
+          details: JSON.stringify(details),
+          paid
+        }
+      }
     );
+
     res.json({ message: 'Cash movement registered successfully.' });
   } catch (error) {
     console.error('Error registering cash movement:', error);
     res.status(500).json({ error: 'Internal server error.' });
   }
 };
+
 
 // Requiere sequelize ya configurado (como tenés)
 const getTodayCashSummary = async (req, res) => {
