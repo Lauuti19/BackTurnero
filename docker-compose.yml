@@ -8,9 +8,15 @@ services:
     networks:
       - turnero-network
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     restart: unless-stopped
     environment:
       - DB_HOST=db
       - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=turnero
+
+networks:
+  turnero-network:
+    driver: bridge
