@@ -73,9 +73,9 @@ POST http://localhost:3001/api/workhours/liquidar
 Content-Type: application/json
 
 {
-  "id_usuario": 6,
+  "id_usuario": 9,
   "periodo": "2025-08",
-  "horas_pagadas": 16
+  "horas_pagadas": 20
 }
 
 ### Liquidaciones por rango
