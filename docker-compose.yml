@@ -7,9 +7,10 @@ services:
       - .env
     networks:
       - turnero-network
-      
-    restart: always
-
-networks:
-  turnero-network:
-    external: true
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
