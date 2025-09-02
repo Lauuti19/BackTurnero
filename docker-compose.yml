@@ -7,8 +7,6 @@ services:
       - .env
     networks:
       - turnero-network
-    depends_on:
-      - db
     restart: unless-stopped
     environment:
       - DB_HOST=db
@@ -16,7 +14,9 @@ services:
       - DB_USER=root
       - DB_PASSWORD=rootpassword
       - DB_NAME=turnero
+    # depends_on:
+    #   - db
 
 networks:
   turnero-network:
-    driver: bridge
+    external: true  
