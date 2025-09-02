@@ -8,6 +8,11 @@ services:
     networks:
       - turnero-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     environment:
       - DB_HOST=db
       - DB_PORT=3306
