@@ -41,13 +41,14 @@ const registerUser = async (req, res) => {
     const { email, password, nombre, dni, celular, id_rol } = req.body;
 
     try {
-        const [user] = await sequelize.query('CALL GetUserByEmail(:email)', {
-        replacements: { email },
-        });
+        const users = await sequelize.query('CALL GetUserByEmail(:email)', {
+  replacements: { email },
+});
+const user = users[0];
 
-        if (user) {
-        return res.status(400).json({ message: 'El email ya está registrado.' });
-        }
+if (user) {
+  return res.status(400).json({ message: 'El email ya está registrado.' });
+}
 
         const hashedPassword = await bcrypt.hash(password, 10);
         await sequelize.query('CALL RegisterUser(:email, :password, :nombre, :dni, :celular, :id_rol)', {
