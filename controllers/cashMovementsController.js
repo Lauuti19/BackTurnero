@@ -103,6 +103,30 @@ const getCashSummaryByPaymentMethod = async (req, res) => {
   }
 };
 
+
+const registerCashOut = async (req, res) => {
+  const { metodo_pago, id_usuario, concepto, monto, pagado } = req.body;
+
+  if (!metodo_pago || !id_usuario || !concepto || !monto) {
+    return res.status(400).json({ error: 'Faltan parámetros requeridos.' });
+  }
+
+  try {
+    await sequelize.query(
+      'CALL RegisterCashOut(:metodo_pago, :id_usuario, :concepto, :monto, :pagado)',
+      {
+        replacements: { metodo_pago, id_usuario, concepto, monto, pagado: pagado || 0 }
+      }
+    );
+    res.json({ message: 'Egreso registrado correctamente.' });
+  } catch (error) {
+    console.error('Error en registrarEgreso:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
 module.exports = {
   registerCashMovement,
   getAllCashMovements,
@@ -110,6 +134,7 @@ module.exports = {
   getTodayCashMovements,
   getTodayCashSummary,
   getCashEfectivoDisponible,
-  getCashSummaryByPaymentMethod
+  getCashSummaryByPaymentMethod,
+  registerCashOut
 };
 

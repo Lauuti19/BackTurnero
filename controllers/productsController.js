@@ -30,32 +30,25 @@ const getProducts = async (req, res) => {
   }
 };
 
-// Editar producto (parcial)
-const updateProduct = async (req, res) => {
-  const { id_producto, nombre, descripcion, precio, stock } = req.body;
-  if (!id_producto) {
-    return res.status(400).json({ error: 'Falta el id_producto.' });
+// Editar solo precio del producto
+const updateProductPrice = async (req, res) => {
+  const { id_producto, precio } = req.body;
+  if (!id_producto || precio === undefined) {
+    return res.status(400).json({ error: 'Faltan parámetros id_producto y precio.' });
   }
 
   try {
     await sequelize.query(
-      'CALL UpdateProduct(:id_producto, :nombre, :descripcion, :precio, :stock)',
-      {
-        replacements: {
-          id_producto,
-          nombre: nombre !== undefined ? nombre : null,
-          descripcion: descripcion !== undefined ? descripcion : null,
-          precio: precio !== undefined ? precio : null,
-          stock: stock !== undefined ? stock : null
-        }
-      }
+      'CALL UpdateProductPrice(:id_producto, :precio)',
+      { replacements: { id_producto, precio } }
     );
-    res.json({ message: 'Producto actualizado correctamente.' });
+    res.json({ message: 'Precio actualizado correctamente.' });
   } catch (error) {
-    console.error('Error al actualizar producto:', error);
+    console.error('Error al actualizar precio:', error);
     res.status(500).json({ error: 'Error interno del servidor.' });
   }
 };
+
 
 // Eliminar producto
 const deleteProduct = async (req, res) => {
@@ -76,4 +69,4 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = { createProduct, getProducts, updateProduct, deleteProduct };
+module.exports = { createProduct, getProducts, updateProductPrice, deleteProduct };

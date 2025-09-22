@@ -225,6 +225,42 @@ const getLiquidacionesPorRango = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const getAttendanceStatus = async (req, res) => {
+  const { id_usuario, fecha } = req.query;
+  if (!id_usuario || !fecha) {
+    return res.status(400).json({ error: 'Faltan parámetros id_usuario y fecha (YYYY-MM-DD).' });
+  }
+
+  try {
+    const [rows] = await sequelize.query(
+      'CALL GetAttendanceStatus(:id_usuario, :fecha)',
+      { replacements: { id_usuario, fecha } }
+    );
+    // rows es una fila con { status, check_in, check_out }
+    return res.json(rows || { status: 'none' });
+  } catch (error) {
+    console.error('Error en GetAttendanceStatus:', error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+// Obtener estado de check-in/check-out del día
+const getCheckStatusDia = async (req, res) => {
+  const { id_usuario, fecha } = req.query;
+  if (!id_usuario || !fecha) {
+    return res.status(400).json({ error: 'Faltan parámetros id_usuario y fecha (YYYY-MM-DD).' });
+  }
+
+  try {
+    const [result] = await sequelize.query(
+      'CALL GetCheckStatusDia(:id_usuario, :fecha)',
+      { replacements: { id_usuario, fecha } }
+    );
+    return res.json(result);
+  } catch (error) {
+    console.error('Error en GetCheckStatusDia:', error);
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 
 module.exports = {
@@ -240,5 +276,7 @@ module.exports = {
   getAsistenciasProfes,
   getHorasTrabajadasProfes,
 getPreLiquidacionProfesor,
-getLiquidacionesPorRango
+getLiquidacionesPorRango,
+getAttendanceStatus,
+getCheckStatusDia
 };

@@ -7,7 +7,8 @@ const {
   getTodayCashMovements,
   getTodayCashSummary,
   getCashEfectivoDisponible,
-  getCashSummaryByPaymentMethod
+  getCashSummaryByPaymentMethod,
+  registerCashOut
 } = require('../controllers/cashMovementsController');
 
 const { authorizeRole } = require('../middlewares/authMiddleware');
@@ -22,5 +23,6 @@ router.post('/register', authenticateToken, authorizeRole(['admin', 'profesor'])
 router.get('/summary/today', authenticateToken, authorizeRole(['admin']), getTodayCashSummary);             
 router.get('/summary/efectivo', authenticateToken, authorizeRole(['profesor','admin']), getCashEfectivoDisponible); 
 router.get('/summary/by-payment', authenticateToken, authorizeRole(['admin']), getCashSummaryByPaymentMethod);    
+router.post('/egreso', authenticateToken, authorizeRole(['admin','profesor']), registerCashOut);
 
 module.exports = router;

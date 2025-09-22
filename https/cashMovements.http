@@ -40,5 +40,18 @@ Content-Type: application/json
 
 ###  Obtener resumen por método de pago (solo admins)
 GET http://localhost:3001/api/cash-movements/summary/by-payment
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo2LCJlbWFpbCI6InNvbHN2N0BnbWFpbC5jb20iLCJpZF9yb2wiOjIsIm5vbWJyZSI6IlNvbCIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzU4NTc3NDE2LCJleHAiOjE3NTg1ODEwMTZ9.ftxc9r4S8Vq1pRD1NpRJ_0ndQW2FR7EMTUuNQ4zv3KQ
 Content-Type: application/json
+
+### Registrar un egreso general
+POST http://localhost:3001/api/cash-movements/egreso
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo2LCJlbWFpbCI6InNvbHN2N0BnbWFpbC5jb20iLCJpZF9yb2wiOjIsIm5vbWJyZSI6IlNvbCIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzU4NTc3NDE2LCJleHAiOjE3NTg1ODEwMTZ9.ftxc9r4S8Vq1pRD1NpRJ_0ndQW2FR7EMTUuNQ4zv3KQ
+Content-Type: application/json
+
+{
+  "metodo_pago": "efectivo",
+  "id_usuario": 9,
+  "concepto": "Pago de luz",
+  "monto": 15000,
+  "pagado": 1
+}

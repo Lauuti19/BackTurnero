@@ -16,7 +16,7 @@ GET http://localhost:3001/api/products/list
 
 
 ### Eliminar producto
-DELETE http://localhost:3001/api/products/delete/1
+DELETE http://localhost:3001/api/products/delete/4
 
 ### Actualizar solo el precio
 PUT http://localhost:3001/api/products/update

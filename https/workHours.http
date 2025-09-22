@@ -81,3 +81,11 @@ Content-Type: application/json
 ### Liquidaciones por rango
 GET http://localhost:3001/api/workhours/liquidaciones?desde=2025-08-01&hasta=2025-08-31
 Content-Type: application/json
+
+### Estado de asistencia
+
+GET http://localhost:3001/api/workhours/status?id_usuario=6&fecha=2025-09-08
+
+### Verificar estado check-in/out del día
+GET http://localhost:3001/api/workhours/check-status-dia?id_usuario=6&fecha=2025-09-22
+Content-Type: application/json

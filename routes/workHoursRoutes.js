@@ -13,7 +13,9 @@ const {
   getAsistenciasProfes,
   getHorasTrabajadasProfes,
   getPreLiquidacionProfesor,
-  getLiquidacionesPorRango
+  getLiquidacionesPorRango,
+  getAttendanceStatus,
+  getCheckStatusDia
 } = require('../controllers/workHoursController');
 
 router.post('/create', createWorkHours);
@@ -29,5 +31,8 @@ router.get('/asistencias', getAsistenciasProfes);
 router.get('/horas-profes', getHorasTrabajadasProfes);
 router.get('/pre-liquidacion', getPreLiquidacionProfesor);
 router.get('/liquidaciones', getLiquidacionesPorRango); 
+router.get('/status', getAttendanceStatus);
+router.get('/check-status-dia', getCheckStatusDia);
+
 
 module.exports = router;
