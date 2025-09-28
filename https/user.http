@@ -52,3 +52,6 @@ Content-Type: application/json
 GET http://localhost:3001/api/usuarios/buscar?nombre=lau
 Content-Type: application/json
 
+### Obtener profes y admins
+GET http://localhost:3001/api/usuarios/profes-admins/buscar
+Content-Type: application/json
