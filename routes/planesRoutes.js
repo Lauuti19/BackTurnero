@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const { getPlanes, deletePlan, createPlan, updatePlan } = require('../controllers/planesController');
+const { authenticateToken } = require('../middlewares/authenticateToken');
+const { authorizeRole } = require('../middlewares/authMiddleware');
 
-router.get('/', getPlanes);
+router.get('/', authenticateToken, getPlanes);
 
-router.put('/delete', deletePlan);
+router.put('/delete', authenticateToken, authorizeRole(['admin','profesor']),deletePlan);
 
-router.post('/create', createPlan);
+router.post('/create', authenticateToken,authorizeRole(['admin','profesor']),createPlan);
 
-router.put('/update', updatePlan);
+router.put('/update', authenticateToken,authorizeRole(['admin','profesor']),updatePlan);
 
 module.exports = router;

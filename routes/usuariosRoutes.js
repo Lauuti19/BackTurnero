@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { buscarUsuariosPorNombre, getUserFullInfo, updateUserInfo, getProfesAndAdmins } = require('../controllers/usuariosController');
+const { authenticateToken } = require('../middlewares/authenticateToken');
+const { authorizeRole } = require('../middlewares/authMiddleware');
 
-router.get('/buscar', buscarUsuariosPorNombre);
 
-router.get('/:id_usuario', getUserFullInfo);
+router.get('/buscar', authenticateToken,buscarUsuariosPorNombre);
 
-router.get('/profes-admins/buscar', getProfesAndAdmins);
+router.get('/:id_usuario', authenticateToken,getUserFullInfo);
 
-router.put('/update', updateUserInfo);
+router.get('/profes-admins/buscar', authenticateToken,getProfesAndAdmins);
+
+router.put('/update', authenticateToken,updateUserInfo);
 
 module.exports = router;

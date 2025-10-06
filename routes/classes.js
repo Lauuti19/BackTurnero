@@ -1,27 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits} = require('../controllers/classesController');
+const { authorizeRole } = require('../middlewares/authMiddleware');
+const { authenticateToken } = require('../middlewares/authenticateToken');
 
 
-router.get('/all', getAllClasses);
+router.get('/all', authenticateToken, getAllClasses);
 
-router.get('/by-user', getClassesByUser);
+router.get('/by-user',authenticateToken, getClassesByUser);
 
-router.post('/register', registerToClass);
+router.post('/register',authenticateToken, registerToClass);
 
-router.get('/users-by-class', getUsersByClassAndDate),
+router.get('/users-by-class',authenticateToken, getUsersByClassAndDate),
 
-router.post('/unregister', unregisterFromClass);
+router.post('/unregister',authenticateToken, unregisterFromClass);
 
-router.post('/create', createClass);
+router.post('/create',authenticateToken, authorizeRole(['admin','profesor']), createClass);
 
-router.get('/by-day', getClassesByDay);
+router.get('/by-day',authenticateToken, getClassesByDay);
 
-router.put('/update', updateClass);
+router.put('/update',authenticateToken, authorizeRole(['admin','profesor']),updateClass);
 
-router.put('/delete', deleteClass);
+router.put('/delete', authenticateToken,authorizeRole(['admin','profesor']), deleteClass);
 
-router.get('/by-user-no-credits', getClassesByUserNoCredits);
+router.get('/by-user-no-credits',authenticateToken, getClassesByUserNoCredits);
 
 
 

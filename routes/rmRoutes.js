@@ -5,12 +5,15 @@ const {
   getRMsByUser,
   updateRM
 } = require('../controllers/rmController');
+const { authenticateToken } = require('../middlewares/authenticateToken');
+const { authorizeRole } = require('../middlewares/authMiddleware');
 
-router.post('/', createRM);
 
-router.get('/user/:id_usuario', getRMsByUser);
+router.post('/', authenticateToken,createRM);
 
-router.put('/update', updateRM);
+router.get('/user/:id_usuario', authenticateToken,getRMsByUser);
+
+router.put('/update', authenticateToken,updateRM);
 
 
 module.exports = router;
