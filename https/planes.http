@@ -1,5 +1,6 @@
 #crear plan 
 POST http://localhost:3001/api/planes/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo2LCJlbWFpbCI6InNvbHN2N0BnbWFpbC5jb20iLCJpZF9yb2wiOjIsIm5vbWJyZSI6IlNvbCIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzU5Nzg3NTEzLCJleHAiOjE3NTk3OTExMTN9.GSUBZ-hO1u-x-MsjLyYquUwDS8oG8WYVmBztOGvvQIk
 Content-Type: application/json
 
 {

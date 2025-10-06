@@ -8,7 +8,7 @@ POST http://localhost:3001/api/payments/register-fee
 Content-Type: application/json
 
 {
-  "id_usuario": 9,
+  "id_usuario": 4,
   "id_plan": 4,
   "metodo_pago": "efectivo",
   "pagado": true
@@ -16,14 +16,16 @@ Content-Type: application/json
 
 
 ### 🔹 Registrar nueva cuota pero dejarla pendiente (sin pagar)
-POST http://localhost:3001/api/payments/register-fee
+POST https://backturnero.onrender.com/api/payments/register-fee
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo2LCJlbWFpbCI6InNvbHN2N0BnbWFpbC5jb20iLCJpZF9yb2wiOjIsIm5vbWJyZSI6IlNvbCIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzU5Nzg3NTEzLCJleHAiOjE3NTk3OTExMTN9.GSUBZ-hO1u-x-MsjLyYquUwDS8oG8WYVmBztOGvvQIk
+
 
 {
-  "id_usuario": 6,
+  "id_usuario": 4,
   "id_plan": 1,
   "metodo_pago": "transferencia",
-  "pagado": false
+  "pagado": true
 }
 
 

@@ -20,13 +20,14 @@ Content-Type: application/json
 
 ###registertoClass
 
-POST http://localhost:3001/api/classes/register
+POST https://backturnero.onrender.com/api/classes/register
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo0LCJlbWFpbCI6ImxhdUBleGFtcGxlLmNvbSIsImlkX3JvbCI6Mywibm9tYnJlIjoiTGF1dGFybyBCdXN0YW1hbnRlIiwiaWRfZXN0YWRvIjoxLCJpYXQiOjE3NTk3ODczMTksImV4cCI6MTc1OTc5MDkxOX0.ny4j2m_tG_GkOb-Dt-ZdkhfXJHNa_EN96mmojL1qwm0
 Content-Type: application/json
 
 {
   "userId": 4,
-  "classId": 10,
-  "fecha": "2025-06-06"
+  "classId": 2,
+  "fecha": "2025-10-06"
 }
 
 
