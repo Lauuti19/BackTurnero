@@ -201,6 +201,35 @@ const deleteClass = async (req, res) => {
     res.status(500).json({ error: error.original?.sqlMessage || 'Internal server error' });
   }
 };
+const updateAttendance = async (req, res) => {
+  const { id_clase, fecha, asistencias } = req.body;
+
+  if (!id_clase || !fecha || !asistencias) {
+    return res.status(400).json({
+      error: 'Faltan parámetros: id_clase, fecha y asistencias son obligatorios.',
+    });
+  }
+
+  try {
+    const asistenciasJson =
+      typeof asistencias === 'string' ? asistencias : JSON.stringify(asistencias);
+
+    await sequelize.query(
+      'CALL ActualizarAsistenciaClase(:id_clase, :fecha, :asistencias)',
+      {
+        replacements: { id_clase, fecha, asistencias: asistenciasJson },
+      }
+    );
+
+    res.status(200).json({ message: 'Asistencia actualizada correctamente.' });
+  } catch (error) {
+    console.error('Error al actualizar asistencia:', error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || 'Error interno del servidor',
+    });
+  }
+};
+
 
 
 module.exports = {
@@ -213,5 +242,6 @@ module.exports = {
     createClass,
     getClassesByDay,
     updateClass, 
-    deleteClass
+    deleteClass,
+    updateAttendance
 };

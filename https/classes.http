@@ -21,13 +21,13 @@ Content-Type: application/json
 ###registertoClass
 
 POST https://backturnero.onrender.com/api/classes/register
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo0LCJlbWFpbCI6ImxhdUBleGFtcGxlLmNvbSIsImlkX3JvbCI6Mywibm9tYnJlIjoiTGF1dGFybyBCdXN0YW1hbnRlIiwiaWRfZXN0YWRvIjoxLCJpYXQiOjE3NTk3ODczMTksImV4cCI6MTc1OTc5MDkxOX0.ny4j2m_tG_GkOb-Dt-ZdkhfXJHNa_EN96mmojL1qwm0
+Authorization: Bearer 
 Content-Type: application/json
 
 {
   "userId": 4,
   "classId": 2,
-  "fecha": "2025-10-06"
+  "fecha": "2025-06-10"
 }
 
 
@@ -52,4 +52,17 @@ Content-Type: application/json
   "id_disciplina": 2,
   "id_dia": 6
 
+}
+
+PUT https://backturnero.onrender.com/api/classes/update-attendance
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "id_clase": 2,
+  "fecha": "2025-10-07",
+  "asistencias": [
+    { "id_usuario": 4, "presente": true },
+    { "id_usuario": 7, "presente": false }
+  ]
 }

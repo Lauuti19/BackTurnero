@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits} = require('../controllers/classesController');
+const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits, updateAttendance} = require('../controllers/classesController');
 const { authorizeRole } = require('../middlewares/authMiddleware');
 const { authenticateToken } = require('../middlewares/authenticateToken');
 
@@ -24,6 +24,13 @@ router.put('/update',authenticateToken, authorizeRole(['admin','profesor']),upda
 router.put('/delete', authenticateToken,authorizeRole(['admin','profesor']), deleteClass);
 
 router.get('/by-user-no-credits',authenticateToken, getClassesByUserNoCredits);
+
+router.put(
+  '/update-attendance',
+  authenticateToken,
+  authorizeRole(['admin', 'profesor']),
+  updateAttendance
+);
 
 
 
