@@ -53,16 +53,16 @@ Content-Type: application/json
   "id_dia": 6
 
 }
+####presentes
 
 PUT https://backturnero.onrender.com/api/classes/update-attendance
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo2LCJlbWFpbCI6InNvbHN2N0BnbWFpbC5jb20iLCJpZF9yb2wiOjIsIm5vbWJyZSI6IlNvbCIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzU5Nzg5NzMwLCJleHAiOjE3NTk3OTMzMzB9.6qRkMj7JvjkRAscUv41Xd0t6hChK32lXMQR-IVltdQM
 Content-Type: application/json
 
 {
   "id_clase": 2,
   "fecha": "2025-10-07",
   "asistencias": [
-    { "id_usuario": 4, "presente": true },
-    { "id_usuario": 7, "presente": false }
-  ]
+    { "id_usuario": 4, "presente": true }
+    ]
 }

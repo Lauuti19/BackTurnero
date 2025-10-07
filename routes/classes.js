@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits, updateAttendance} = require('../controllers/classesController');
+const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits, updateAttendance, checkAttendanceQR,registerIndividualAttendance} = require('../controllers/classesController');
 const { authorizeRole } = require('../middlewares/authMiddleware');
 const { authenticateToken } = require('../middlewares/authenticateToken');
 
@@ -32,6 +32,8 @@ router.put(
   updateAttendance
 );
 
+router.post('/check', authenticateToken, checkAttendanceQR);
+router.put('/register-attendance', authenticateToken, registerIndividualAttendance);
 
 
 module.exports = router;

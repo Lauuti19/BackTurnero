@@ -230,6 +230,71 @@ const updateAttendance = async (req, res) => {
   }
 };
 
+const checkAttendanceQR = async (req, res) => {
+  const { id_usuario } = req.body;
+
+  if (!id_usuario) {
+    return res.status(400).json({ error: 'Falta el parámetro id_usuario.' });
+  }
+
+  try {
+    const [result] = await sequelize.query(
+      'CALL GetTodayClassByUser(:id_usuario)',
+      { replacements: { id_usuario } }
+    );
+
+    if (!result || result.length === 0) {
+      return res.status(200).json({
+        tieneClaseHoy: false,
+        message: 'El usuario no tiene clases registradas hoy.',
+      });
+    }
+
+    const clase = result[0];
+    const yaPresente = clase.presente === 1;
+
+    res.status(200).json({
+      tieneClaseHoy: true,
+      yaPresente,
+      clase: {
+        id_clase: clase.id_clase,
+        disciplina: clase.disciplina,
+        hora: clase.hora,
+      },
+      message: yaPresente
+        ? 'El usuario ya marcó asistencia en esta clase.'
+        : 'Clase disponible para marcar asistencia.',
+    });
+  } catch (error) {
+    console.error('Error al verificar asistencia QR:', error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || 'Error interno del servidor',
+    });
+  }
+};
+const registerIndividualAttendance = async (req, res) => {
+  const { classId, userId, date } = req.body;
+
+  if (!classId || !userId || !date) {
+    return res.status(400).json({
+      error: 'Missing parameters: classId, userId, and date are required.'
+    });
+  }
+
+  try {
+    await sequelize.query('CALL RegisterIndividualAttendance(:classId, :userId, :date)', {
+      replacements: { classId, userId, date },
+    });
+
+    res.status(200).json({ message: 'Attendance successfully registered.' });
+  } catch (error) {
+    console.error('Error registering individual attendance:', error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || 'Internal server error'
+    });
+  }
+};
+
 
 
 module.exports = {
@@ -243,5 +308,7 @@ module.exports = {
     getClassesByDay,
     updateClass, 
     deleteClass,
-    updateAttendance
+    updateAttendance,
+    checkAttendanceQR,
+    registerIndividualAttendance
 };
