@@ -1,5 +1,5 @@
 ##admin
-POST https://backturnero.onrender.com/api/auth/login
+POST http://localhost:3001/api/auth/login
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###profe
-POST https://backturnero.onrender.com/api/auth/login
+POST http://localhost:3001/api/auth/login
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
   "password": "1234567"
 }
 ###alumno
-POST https://backturnero.onrender.com/api/auth/login
+POST http://localhost:3001/api/auth/login
 Content-Type: application/json
 
 {

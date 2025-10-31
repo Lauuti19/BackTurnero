@@ -1,68 +1,147 @@
-###create class
-POST http://localhost:3001/api/classes/create
+### LISTAR clases del día (si hay especiales para la fecha, trae esas)
+GET http://localhost:3001/api/classes/all?fecha=2025-12-25
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYxODY2MTIzLCJleHAiOjE3NjE4Njk3MjN9.mr2axNHcNuX7r1_AE1AM07Uoxg-_mw1UjkXS0oerK_E
+### LISTAR por usuario (día X)
+GET http://localhost:3001/api/classes/by-user?userId=4&fecha=2025-11-20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo0LCJlbWFpbCI6ImxhdUBleGFtcGxlLmNvbSIsImlkX3JvbCI6Mywibm9tYnJlIjoiTGF1dGFybyBCdXN0YW1hbnRlIiwiaWRfZXN0YWRvIjoxLCJpYXQiOjE3NjE3NDgzNDQsImV4cCI6MTc2MTc1MTk0NH0.LImbsGZFdLQaJsw6w4jAx5_hIYdqrpoY5mX_hefCN8I
+
+### LISTAR por usuario SIN créditos (día X)
+GET http://localhost:3001/classes/by-user-no-credits?userId=4&fecha=2025-11-20
+Authorization: Bearer  
+
+### LISTAR usuarios inscriptos en clase NORMAL por fecha
+GET http://localhost:3001/api/classes/users-by-class?classId=12&classType=normal&fecha=2025-11-20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYxNzU1ODU0LCJleHAiOjE3NjE3NTk0NTR9.vliWR2zj5KBPmFSwnvLGWXHWmrAHiUvthbDz-TtYGFE
+
+### LISTAR usuarios inscriptos en clase ESPECIAL por fecha
+GET http://localhost:3001/classes/users-by-class?classId=3&classType=especial&fecha=2025-12-08
+Authorization: Bearer  
+
+### CREAR clase (regular)
+POST http://localhost:3001/classes/create
 Content-Type: application/json
+Authorization: Bearer  
 
 {
-  "id_disciplina": 3,
-  "id_dia": 2,
-  "hora": "14:00:00",
+  "id_disciplina": 1,
+  "id_dia": 3,
+  "hora": "18:00:00",
+  "capacidad_max": 20
+}
+
+### LISTAR clases del plantel por día (regular)
+GET http://localhost:3001/classes/by-day?id_dia=3
+Authorization: Bearer  
+
+### ACTUALIZAR clase (regular)
+PUT http://localhost:3001/classes/update
+Content-Type: application/json
+Authorization: Bearer  
+
+{
+  "id_clase": 12,
+  "hora": "19:00:00",
   "capacidad_max": 25
 }
 
-
-###delete class
-PUT http://localhost:3001/api/classes/delete
+### ELIMINAR clase (lógico)
+PUT http://localhost:3001/classes/delete
 Content-Type: application/json
+Authorization: Bearer  
 
 {
-  "classId": 1
+  "classId": 12
 }
 
-###registertoClass
-
-POST https://backturnero.onrender.com/api/classes/register
-Authorization: Bearer 
+### REGISTRAR en clase NORMAL
+POST http://localhost:3001/api/classes/register
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYxODY2OTE4LCJleHAiOjE3NjE4NzA1MTh9.BbhVovRKdIDItfvy_wV7brYKbS7kZBYFm6X9_EqfB8I
+
+{
+  "userId": 7,
+  "fecha": "2025-11-20",
+  "classId": 12
+}
+
+### REGISTRAR en clase ESPECIAL (feriado)
+POST http://localhost:3001/api/classes/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYxODY2OTE4LCJleHAiOjE3NjE4NzA1MTh9.BbhVovRKdIDItfvy_wV7brYKbS7kZBYFm6X9_EqfB8I
+
+{
+  "userId": 7,
+  "fecha": "2025-12-08",
+  "specialClassId": 1
+}
+
+### DESINSCRIBIR de clase NORMAL
+POST http://localhost:3001/classes/unregister
+Content-Type: application/json
+Authorization: Bearer  
 
 {
   "userId": 4,
-  "classId": 2,
-  "fecha": "2025-06-10"
+  "fecha": "2025-11-20",
+  "classId": 12
 }
 
-
-# Desanotar usuario a una clase
-POST http://localhost:3001/api/classes/unregister
+### DESINSCRIBIR de clase ESPECIAL
+POST http://localhost:3001/classes/unregister
 Content-Type: application/json
+Authorization: Bearer  
 
 {
   "userId": 4,
-  "classId": 10,
-  "fecha": "2025-06-06"
+  "fecha": "2025-12-08",
+  "specialClassId": 3
 }
 
-#update class
-PUT http://localhost:3001/api/classes/update
+### ACTUALIZAR asistencia (NORMAL)
+PUT http://localhost:3001/classes/update-attendance
 Content-Type: application/json
+Authorization: Bearer  
 
 {
-  "id_clase": 1,
-  "hora": "19:00:00",
-  "capacidad_max": 25,
-  "id_disciplina": 2,
-  "id_dia": 6
-
-}
-####presentes
-
-PUT https://backturnero.onrender.com/api/classes/update-attendance
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo2LCJlbWFpbCI6InNvbHN2N0BnbWFpbC5jb20iLCJpZF9yb2wiOjIsIm5vbWJyZSI6IlNvbCIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzU5Nzg5NzMwLCJleHAiOjE3NTk3OTMzMzB9.6qRkMj7JvjkRAscUv41Xd0t6hChK32lXMQR-IVltdQM
-Content-Type: application/json
-
-{
-  "id_clase": 2,
-  "fecha": "2025-10-07",
+  "tipo_clase": "normal",
+  "id_clase": 12,
+  "fecha": "2025-11-20",
   "asistencias": [
-    { "id_usuario": 4, "presente": true }
-    ]
+    { "id_usuario": 4, "presente": 1 },
+    { "id_usuario": 7, "presente": 0 }
+  ]
+}
+
+### ACTUALIZAR asistencia (ESPECIAL)
+PUT http://localhost:3001/classes/update-attendance
+Content-Type: application/json
+Authorization: Bearer  
+
+{
+  "tipo_clase": "especial",
+  "id_clase": 3,
+  "fecha": "2025-12-08",
+  "asistencias": [
+    { "id_usuario": 4, "presente": 1 }
+  ]
+}
+
+### CHECK QR (solo normales con tu SP actual)
+POST http://localhost:3001/classes/check
+Content-Type: application/json
+Authorization: Bearer  
+
+{
+  "id_usuario": 4
+}
+
+### Registrar asistencia individual (manual; normal)
+PUT http://localhost:3001/classes/register-attendance
+Content-Type: application/json
+Authorization: Bearer  
+
+{
+  "classId": 12,
+  "userId": 4,
+  "date": "2025-11-20"
 }

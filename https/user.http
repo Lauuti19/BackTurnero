@@ -45,13 +45,13 @@ Content-Type: application/json
 }
 
 ##### Get user full info
-GET http://localhost:3001/api/usuarios/4
+GET https://backturnero.onrender.com/api/usuarios/4
 Content-Type: application/json
 
 ###buscar usuario 
-GET http://localhost:3001/api/usuarios/buscar?nombre=lau
+GET https://backturnero.onrender.com/api/usuarios/buscar?nombre=lau
 Content-Type: application/json
 
 ### Obtener profes y admins
-GET http://localhost:3001/api/usuarios/profes-admins/buscar
+GET https://backturnero.onrender.com/api/usuarios/profes-admins/buscar
 Content-Type: application/json
