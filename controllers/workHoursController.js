@@ -1,3 +1,4 @@
+// controllers/workHoursController.js
 const sequelize = require('../config/database');
 
 // Crear horas pactadas
@@ -15,7 +16,7 @@ const createWorkHours = async (req, res) => {
   }
 };
 
-// Obtener horas pactadas 
+// Obtener horas pactadas
 const getWorkHours = async (req, res) => {
   const { user_id } = req.query;
   try {
@@ -30,8 +31,7 @@ const getWorkHours = async (req, res) => {
   }
 };
 
-// Liquidar profesor
-
+// Liquidar profesor (acción)
 const liquidarProfesor = async (req, res) => {
   const { id_usuario, periodo, horas_pagadas } = req.body;
   if (!id_usuario || !periodo || horas_pagadas === undefined) {
@@ -50,7 +50,6 @@ const liquidarProfesor = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 
 // Registrar check-in
 const registrarCheckIn = async (req, res) => {
@@ -111,6 +110,7 @@ const updateWorkHours = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 // Obtener horas trabajadas por periodo (YYYY-MM)
 const getWorkedHours = async (req, res) => {
   const { id_usuario, periodo } = req.query;
@@ -123,7 +123,6 @@ const getWorkedHours = async (req, res) => {
       'CALL GetWorkedHours(:id_usuario, :periodo)',
       { replacements: { id_usuario, periodo: periodo || null } }
     );
-
     res.json({ horas_trabajadas: result[0]?.horas_trabajadas || 0 });
   } catch (error) {
     console.error('Error en GetWorkedHours:', error);
@@ -131,7 +130,7 @@ const getWorkedHours = async (req, res) => {
   }
 };
 
-// Obtener horas trabajadas por rango de fechas
+// Obtener horas trabajadas por rango
 const getWorkedHoursByRange = async (req, res) => {
   const { id_usuario, desde, hasta } = req.query;
   if (!id_usuario || !desde || !hasta) {
@@ -143,14 +142,14 @@ const getWorkedHoursByRange = async (req, res) => {
       'CALL GetWorkedHoursByRange(:id_usuario, :desde, :hasta)',
       { replacements: { id_usuario, desde, hasta } }
     );
-
     res.json({ horas_trabajadas: result[0]?.horas_trabajadas || 0 });
   } catch (error) {
     console.error('Error en GetWorkedHoursByRange:', error);
     res.status(500).json({ error: error.message });
   }
 };
-// Listar asistencias de profesores (rango o periodo)
+
+// Listar asistencias de profesores
 const getAsistenciasProfes = async (req, res) => {
   const { desde, hasta, periodo } = req.query;
 
@@ -170,7 +169,7 @@ const getAsistenciasProfes = async (req, res) => {
   }
 };
 
-// Horas trabajadas por cada profesor (rango o periodo)
+// Horas trabajadas por profesor
 const getHorasTrabajadasProfes = async (req, res) => {
   const { desde, hasta, periodo } = req.query;
 
@@ -189,6 +188,8 @@ const getHorasTrabajadasProfes = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Pre-liquidación (ya estaba)
 const getPreLiquidacionProfesor = async (req, res) => {
   const { id_usuario, periodo } = req.query;
   if (!id_usuario || !periodo) {
@@ -206,7 +207,8 @@ const getPreLiquidacionProfesor = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-// Obtener liquidaciones por rango de fechas
+
+// Obtener liquidaciones por rango
 const getLiquidacionesPorRango = async (req, res) => {
   const { desde, hasta } = req.query;
 
@@ -225,6 +227,8 @@ const getLiquidacionesPorRango = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Estado de asistencia
 const getAttendanceStatus = async (req, res) => {
   const { id_usuario, fecha } = req.query;
   if (!id_usuario || !fecha) {
@@ -236,14 +240,14 @@ const getAttendanceStatus = async (req, res) => {
       'CALL GetAttendanceStatus(:id_usuario, :fecha)',
       { replacements: { id_usuario, fecha } }
     );
-    // rows es una fila con { status, check_in, check_out }
     return res.json(rows || { status: 'none' });
   } catch (error) {
     console.error('Error en GetAttendanceStatus:', error);
     return res.status(500).json({ error: error.message });
   }
 };
-// Obtener estado de check-in/check-out del día
+
+// check del día
 const getCheckStatusDia = async (req, res) => {
   const { id_usuario, fecha } = req.query;
   if (!id_usuario || !fecha) {
@@ -262,7 +266,6 @@ const getCheckStatusDia = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createWorkHours,
   getWorkHours,
@@ -275,8 +278,8 @@ module.exports = {
   getWorkedHoursByRange,
   getAsistenciasProfes,
   getHorasTrabajadasProfes,
-getPreLiquidacionProfesor,
-getLiquidacionesPorRango,
-getAttendanceStatus,
-getCheckStatusDia
+  getPreLiquidacionProfesor,
+  getLiquidacionesPorRango,
+  getAttendanceStatus,
+  getCheckStatusDia
 };

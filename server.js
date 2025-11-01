@@ -14,6 +14,7 @@ const rmRoutes = require('./routes/rmRoutes');
 const productsRoutes = require('./routes/productsRoutes')
 const cashMovementsRoutes = require('./routes/cashMovementsRoutes')
 const workHoursRoutes = require('./routes/workHoursRoutes')
+const liquidacionesRoutes = require('./routes/liquidacionesRoutes')
 
 const sequelize = require('./config/database');
 
@@ -39,7 +40,7 @@ app.use('/api/rm', rmRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/cash-movements', cashMovementsRoutes);
 app.use('/api/workhours', workHoursRoutes);
-
+app.use('/api/liquidaciones', liquidacionesRoutes);
 
 sequelize.sync()
     .then(() => {
