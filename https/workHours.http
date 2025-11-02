@@ -95,12 +95,12 @@ Authorization: Bearer
 ### ------- REPORTES (api/liquidaciones) -------
 
 ### Listar liquidaciones cerradas por periodo
-GET http://localhost:3001/api/liquidaciones/cerradas?periodo=2025-08
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTA2NzY2LCJleHAiOjE3NjIxMTAzNjZ9.aDr8_6Qgp0TbKi1CLCLMAWpjlZpKmsIGpRWvZ-HHPOA
+GET http://localhost:3001/api/liquidaciones/cerradas?periodo=2025-11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTEyNDQyLCJleHAiOjE3NjIxMTYwNDJ9.tlGTO36cNOzgiIKBdBuhi7p12TqXaLIGXSFJ8kVtE6w
 
 
 ### Detalle de liquidaciones por periodo
-GET http://localhost:3001/api/liquidaciones/detalle?periodo=2025-08
+GET http://localhost:3001/api/liquidaciones/detalle?periodo=2025-11
 Authorization: Bearer 
 
 ### Liquidaciones de un profesor (una o todas por periodo)

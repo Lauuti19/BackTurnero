@@ -49,7 +49,7 @@ GET https://backturnero.onrender.com/api/usuarios/4
 Content-Type: application/json
 
 ###buscar usuario 
-GET https://backturnero.onrender.com/api/usuarios/buscar?nombre=lau
+GET http://localhost:3001/api/usuarios/buscar?nombre=iv
 Content-Type: application/json
 
 ### Obtener profes y admins

@@ -1,0 +1,22 @@
+### 🧾 Obtener todas las deudas
+GET http://localhost:3001/api/deudas/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTEyNDQyLCJleHAiOjE3NjIxMTYwNDJ9.tlGTO36cNOzgiIKBdBuhi7p12TqXaLIGXSFJ8kVtE6w
+
+
+###
+
+### 💰 Deudas de un usuario
+GET http://localhost:3001/api/deudas/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo0LCJlbWFpbCI6ImxhdUBleGFtcGxlLmNvbSIsImlkX3JvbCI6Mywibm9tYnJlIjoiTGF1dGFybyBCdXN0YW1hbnRlIiwiaWRfZXN0YWRvIjoxLCJpYXQiOjE3NjIxMTY3NzEsImV4cCI6MTc2MjEyMDM3MX0.CwIvhFMvySFJGA6r3U_vdF4oEMmwZpZSA9-4z60uZ6Y
+
+
+###
+
+### 📊 Resumen de deudas de un usuario
+GET http://localhost:3001/api/deudas/7/resumen
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo0LCJlbWFpbCI6ImxhdUBleGFtcGxlLmNvbSIsImlkX3JvbCI6Mywibm9tYnJlIjoiTGF1dGFybyBCdXN0YW1hbnRlIiwiaWRfZXN0YWRvIjoxLCJpYXQiOjE3NjIxMTY3NzEsImV4cCI6MTc2MjEyMDM3MX0.CwIvhFMvySFJGA6r3U_vdF4oEMmwZpZSA9-4z60uZ6Y
+
+###
+
+GET http://localhost:3001/api/deudas/movimientos?meses=6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo0LCJlbWFpbCI6ImxhdUBleGFtcGxlLmNvbSIsImlkX3JvbCI6Mywibm9tYnJlIjoiTGF1dGFybyBCdXN0YW1hbnRlIiwiaWRfZXN0YWRvIjoxLCJpYXQiOjE3NjIxMTY3NzEsImV4cCI6MTc2MjEyMDM3MX0.CwIvhFMvySFJGA6r3U_vdF4oEMmwZpZSA9-4z60uZ6Y
