@@ -1,110 +1,79 @@
-### ✅ Crear una rutina con ejercicios
-POST http://localhost:3001/api/routines/create
+### 1) Crear rutina plantilla con ejercicios
+POST http://localhost:3001/api/routines/create-template
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-  "userId": 4,
-  "routineName": "Pecho y Triceps",
+  "routineName": "Full body 3 dias",
   "exercises": [
-    {
-      "id_ejercicio": 1,
-      "dia": 1,
-      "orden": 3,
-      "rondas": 4,
-      "repeticiones": "10"
-    },
-    {
-      "id_ejercicio": 2,
-      "dia": 1,
-      "orden": 4,
-      "rondas": 3,
-      "repeticiones": "12"
-    }
+    { "id_ejercicio": 1, "dia": 1, "orden": 1, "rondas": 4, "repeticiones": "10-12" },
+    { "id_ejercicio": 2, "dia": 1, "orden": 2, "rondas": 3, "repeticiones": "12" },
+    { "id_ejercicio": 3, "dia": 2, "orden": 1, "rondas": 4, "repeticiones": "8-10" }
   ]
 }
 
-###
+### 2) Asignar rutina a un usuario (que quede como única activa)
+POST http://localhost:3001/api/routines/assign
+Authorization: Bearer 
+Content-Type: application/json
 
-### 🔍 Obtener todas las rutinas de un usuario por ID
+{
+  "id_rutina": 1,
+  "id_usuario": 4,
+  "unica_activa": 1
+}
+
+### 3) Desactivar esa rutina para ese usuario
+POST http://localhost:3001/api/routines/deactivate-user
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "id_rutina": 5,
+  "id_usuario": 12
+}
+
+### 4) Ver rutinas de un usuario
 GET http://localhost:3001/api/routines/user/4
-Content-Type: application/json
+Authorization: Bearer 
 
-###
+### 5) Listar todas las plantillas
+GET http://localhost:3001/api/routines
+Authorization: Bearer 
 
-### 🔍 Buscar rutinas por nombre del usuario
-GET http://localhost:3001/api/routines/search?name=lau
-Content-Type: application/json
+### 6) Ver detalle de una rutina
+GET http://localhost:3001/api/routines/5
+Authorization: Bearer 
 
-
-### ✅ Solo actualizar el nombre de la rutina
-PUT http://localhost:3001/api/routines/update
+### 7) Activar / desactivar rutina
+PUT http://localhost:3001/api/routines/5/active
+Authorization: Bearer
 Content-Type: application/json
 
 {
-  "id_rutina": 2,
-  "routineName": "Pierna + Cuadriceps"
+  "activa": 0
 }
 
-###
-
-### Solo actualizar los ejercicios (reemplaza todos)
-PUT http://localhost:3001/api/routines/update
+### 8) Agregar ejercicio a una rutina
+POST http://localhost:3001/api/routines/1/add-exercise
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTIzNTIxLCJleHAiOjE3NjIxMjcxMjF9.T7ZPZj-uA9PMue5dUg1gamB9O1a8nC-BLXW4eaDB1uw
 Content-Type: application/json
 
 {
-  "id_rutina": 2,
-  "exercises": [
-    {
-      "id_ejercicio": 4,
-      "dia": 2,
-      "orden": 1,
-      "rondas": 4,
-      "repeticiones": "10"
-    },
-    {
-      "id_ejercicio": 6,
-      "dia": 2,
-      "orden": 2,
-      "rondas": 3,
-      "repeticiones": "12"
-    }
-  ]
+  "id_ejercicio": 9,
+  "dia": 3,
+  "orden": 1,
+  "rondas": 3,
+  "repeticiones": "15"
 }
 
-###
-
-### ✅ Actualizar nombre y ejercicios
-PUT http://localhost:3001/api/routines/update
+### 9) Quitar ejercicio de una rutina
+DELETE http://localhost:3001/api/routines/5/remove-exercise
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-  "id_rutina": 2,
-  "routineName": "Piernas / cuadriceps",
-  "exercises": [
-    {
-      "id_ejercicio": 3,
-      "dia": 3,
-      "orden": 1,
-      "rondas": 5,
-      "repeticiones": "8"
-    },
-    {
-      "id_ejercicio": 5,
-      "dia": 3,
-      "orden": 2,
-      "rondas": 4,
-      "repeticiones": "10"
-    }
-  ]
-}
-
-
-
-
-###  Eliminar rutina 
-PUT http://localhost:3001/api/routines/delete
-Content-Type: application/json
-
-{
-  "id_rutina": 2
+  "id_ejercicio": 9,
+  "dia": 3,
+  "orden": 2
 }
