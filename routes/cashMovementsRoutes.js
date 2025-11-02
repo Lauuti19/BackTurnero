@@ -8,7 +8,11 @@ const {
   getTodayCashSummary,
   getCashEfectivoDisponible,
   getCashSummaryByPaymentMethod,
-  registerCashOut
+  registerCashOut,
+  getTotalCashByPeriod,
+  getEgresosByPeriod,
+  getCajaActiva,
+  cerrarCajaMensual,
 } = require('../controllers/cashMovementsController');
 
 const { authorizeRole } = require('../middlewares/authMiddleware');
@@ -24,5 +28,21 @@ router.get('/summary/today', authenticateToken, authorizeRole(['admin']), getTod
 router.get('/summary/efectivo', authenticateToken, authorizeRole(['profesor','admin']), getCashEfectivoDisponible); 
 router.get('/summary/by-payment', authenticateToken, authorizeRole(['admin']), getCashSummaryByPaymentMethod);    
 router.post('/egreso', authenticateToken, authorizeRole(['admin','profesor']), registerCashOut);
+router.get('/summary/by-period', authenticateToken, authorizeRole(['admin','profesor']), getTotalCashByPeriod);
+router.get('/egresos/by-period', authenticateToken, authorizeRole(['admin','profesor']), getEgresosByPeriod);
 
+
+router.get(
+  '/caja/activa',
+  authenticateToken,
+  authorizeRole(['admin']),
+  getCajaActiva
+);
+
+router.post(
+  '/caja/cerrar',
+  authenticateToken,
+  authorizeRole(['admin']),
+  cerrarCajaMensual
+);
 module.exports = router;

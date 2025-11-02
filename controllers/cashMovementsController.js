@@ -124,8 +124,121 @@ const registerCashOut = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const getTotalCashByPeriod = async (req, res) => {
+  // aceptar ambas formas
+  const { periodo, period } = req.query;
+  const targetPeriod = periodo || period;
+
+  if (!targetPeriod) {
+    return res
+      .status(400)
+      .json({ error: "Falta el parámetro 'periodo' (formato YYYY-MM)." });
+  }
+
+  try {
+    const totals = await sequelize.query(
+      'CALL GetTotalCashByPaymentMethodAndPeriod(:p_periodo)',
+      {
+        replacements: { p_periodo: targetPeriod }
+      }
+    );
+
+    // el SP devuelve filas agrupadas por método, así que las mandamos tal cual
+    res.json({
+      periodo: targetPeriod,
+      totals: Array.isArray(totals) ? totals : []
+    });
+  } catch (error) {
+    console.error('Error getting total cash by period:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
 
 
+const getEgresosByPeriod = async (req, res) => {
+  const { periodo, period } = req.query;
+  const targetPeriod = periodo || period;
+
+  if (!targetPeriod) {
+    return res
+      .status(400)
+      .json({ error: "Falta el parámetro 'periodo' (formato YYYY-MM)." });
+  }
+
+  try {
+    const egresos = await sequelize.query(
+      'CALL GetEgresosByPeriod(:p_periodo)',
+      {
+        replacements: { p_periodo: targetPeriod }
+      }
+    );
+
+    res.json({
+      periodo: targetPeriod,
+      egresos: Array.isArray(egresos) ? egresos : []
+    });
+  } catch (error) {
+    console.error('Error getting egresos by period:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
+// Cerrar la caja mensual
+const cerrarCajaMensual = async (req, res) => {
+  const { periodo, ahorros = 0, observaciones = null } = req.body;
+
+  if (!periodo) {
+    return res
+      .status(400)
+      .json({ error: "Falta el parámetro 'periodo' (formato YYYY-MM)." });
+  }
+
+  try {
+    const result = await sequelize.query(
+      'CALL CerrarCajaMensual(:p_periodo, :p_ahorros, :p_observaciones)',
+      {
+        replacements: {
+          p_periodo: periodo,
+          p_ahorros: ahorros,
+          p_observaciones: observaciones
+        }
+      }
+    );
+
+    res.json({
+      message: 'Caja cerrada correctamente.',
+      result: Array.isArray(result) ? result : []
+    });
+  } catch (error) {
+    console.error('Error closing monthly cash box:', error);
+    // si el SP tiró SIGNAL porque las acciones no suman 100
+    res.status(500).json({ error: error.message || 'Internal server error.' });
+  }
+};
+
+const getCajaActiva = async (req, res) => {
+  const { periodo } = req.query;
+
+  try {
+    // llamamos al SP nuevo, que acepta periodo opcional
+    const caja = await sequelize.query(
+      "CALL GetCajaActivaActualizada(:p_periodo)",
+      {
+        replacements: { p_periodo: periodo || null },
+      }
+    );
+
+    // el SP devuelve un array con una fila o vacío
+    return res.json({
+      caja: Array.isArray(caja) ? caja : [],
+    });
+  } catch (error) {
+    console.error("Error en getCajaActiva:", error);
+    return res.status(500).json({
+      error: error.message || "Error interno del servidor.",
+    });
+  }
+};
 
 module.exports = {
   registerCashMovement,
@@ -135,6 +248,10 @@ module.exports = {
   getTodayCashSummary,
   getCashEfectivoDisponible,
   getCashSummaryByPaymentMethod,
-  registerCashOut
+  registerCashOut,
+  getTotalCashByPeriod,
+  getEgresosByPeriod,
+  getCajaActiva,
+  cerrarCajaMensual,
 };
 

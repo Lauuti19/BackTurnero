@@ -1,0 +1,56 @@
+@baseUrl = http://localhost:3001/api/cash
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTA2NzY2LCJleHAiOjE3NjIxMTAzNjZ9.aDr8_6Qgp0TbKi1CLCLMAWpjlZpKmsIGpRWvZ-HHPOA
+
+
+###
+# 1) Crear / actualizar una acción para un usuario
+POST {{baseUrl}}/upsert
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "id_usuario": 7,
+  "porcentaje": 55,
+  "fecha_inicio": "2020-08-10"
+}
+
+###
+# 2) Desactivar una acción
+POST {{baseUrl}}/desactivar
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "id_usuario": 1,
+  "fecha_fin": "2025-11-30"
+}
+
+###
+# 3) Ver acciones activas
+GET {{baseUrl}}/activas
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+
+###
+# 4) Distribución de ganancias por caja
+GET {{baseUrl}}/distribucion/by-caja?id_caja=4
+Authorization: Bearer {{adminToken}}
+
+###
+
+# 6) Cajas mensuales - TODAS
+# llama al SP: CALL GetAllCajasMensuales()
+GET {{baseUrl}}/cajas/todas
+Authorization: Bearer {{adminToken}}
+
+###
+# 7) Cajas mensuales - con filtros
+
+GET {{baseUrl}}/cajas?desde=2025-01&hasta=2025-12&solo_activas=0
+Authorization: Bearer {{adminToken}}
+
+###
+# 8) Cajas mensuales - solo activas
+GET {{baseUrl}}/cajas?solo_activas=1
+Authorization: Bearer {{adminToken}}

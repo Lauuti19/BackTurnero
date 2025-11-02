@@ -12,7 +12,7 @@ Content-Type: application/json
 
 ### Obtener productos
 GET http://localhost:3001/api/products/list
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTEyNDQyLCJleHAiOjE3NjIxMTYwNDJ9.tlGTO36cNOzgiIKBdBuhi7p12TqXaLIGXSFJ8kVtE6w
 
 
 ### Eliminar producto

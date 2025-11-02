@@ -55,3 +55,30 @@ Content-Type: application/json
   "monto": 15000,
   "pagado": 1
 }
+
+### totales del mes
+GET http://localhost:3001/api/cash-movements/summary/by-period?periodo=2025-11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTEwNjEwLCJleHAiOjE3NjIxMTQyMTB9.OTAGeuwxs0PSsMeNcM_xMt-bhHTbRHBaBhy57Wp078o
+
+Content-Type: application/json
+
+### egresos del mes
+GET http://localhost:3001/api/cash-movements/egresos/by-period?periodo=2025-11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTA2NzY2LCJleHAiOjE3NjIxMTAzNjZ9.aDr8_6Qgp0TbKi1CLCLMAWpjlZpKmsIGpRWvZ-HHPOA
+Content-Type: application/json
+
+
+### Traer caja activa
+GET http://localhost:3001/api/cash-movements/caja/activa?periodo=2025-11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTEwNjEwLCJleHAiOjE3NjIxMTQyMTB9.OTAGeuwxs0PSsMeNcM_xMt-bhHTbRHBaBhy57Wp078o
+### Cerrar caja mensual
+POST http://localhost:3001/api/cash-movements/caja/cerrar
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTA2NzY2LCJleHAiOjE3NjIxMTAzNjZ9.aDr8_6Qgp0TbKi1CLCLMAWpjlZpKmsIGpRWvZ-HHPOA
+
+{
+  "periodo": "2025-11",
+  "ahorros": 15000,
+  "observaciones": "Cierre noviembre – se guardó 15k"
+}

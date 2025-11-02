@@ -101,5 +101,15 @@ const getProfesAndAdmins = async (req, res) => {
   }
 };
 
+const getAdmins = async (req, res) => {
+  try {
+    const usuarios = await sequelize.query('CALL GetAdmins()');
+    res.status(200).json(usuarios);
+  } catch (error) {
+    console.error('Error al obtener admins:', error);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+};
 
-module.exports = { buscarUsuariosPorNombre, getUserFullInfo, updateUserInfo, getProfesAndAdmins };
+
+module.exports = { buscarUsuariosPorNombre, getUserFullInfo, updateUserInfo, getProfesAndAdmins, getAdmins};

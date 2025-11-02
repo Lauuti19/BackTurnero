@@ -55,3 +55,7 @@ Content-Type: application/json
 ### Obtener profes y admins
 GET http://localhost:3001/api/usuarios/profes-admins/buscar
 Content-Type: application/json
+
+### Obteneradmins 
+GET http://localhost:3001/api/usuarios/admins/buscar
+Content-Type: application/json

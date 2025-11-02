@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { buscarUsuariosPorNombre, getUserFullInfo, updateUserInfo, getProfesAndAdmins } = require('../controllers/usuariosController');
+const { buscarUsuariosPorNombre, getUserFullInfo, updateUserInfo, getProfesAndAdmins, getAdmins } = require('../controllers/usuariosController');
 
 router.get('/profes-admins/buscar', getProfesAndAdmins);
+
+router.get('/admins/buscar', getAdmins);
 
 router.get('/buscar', buscarUsuariosPorNombre);
 
