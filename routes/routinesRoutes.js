@@ -10,6 +10,7 @@ const {
   setRoutineActive,
   addExerciseToRoutine,
   removeExerciseFromRoutine,
+  getRoutineExercises
 } = require("../controllers/routinesController.js");
 const { authenticateToken } = require("../middlewares/authenticateToken");
 const { authorizeRole } = require("../middlewares/authMiddleware");
@@ -40,6 +41,9 @@ router.post(
 
 // obtener las rutinas del usuario logueado o de uno puntual
 router.get("/user/:userId", authenticateToken, getRoutinesByUser);
+
+router.get("/detail/:id_rutina", authenticateToken, getRoutineExercises);
+
 
 // listar todas las rutinas (plantillas)
 router.get("/", authenticateToken, getAllRoutines);

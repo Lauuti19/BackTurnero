@@ -42,7 +42,7 @@ GET http://localhost:3001/api/routines
 Authorization: Bearer 
 
 ### 6) Ver detalle de una rutina
-GET http://localhost:3001/api/routines/5
+GET http://localhost:3001/api/routines/1
 Authorization: Bearer 
 
 ### 7) Activar / desactivar rutina
@@ -56,7 +56,7 @@ Content-Type: application/json
 
 ### 8) Agregar ejercicio a una rutina
 POST http://localhost:3001/api/routines/1/add-exercise
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3LCJlbWFpbCI6Iml2b21vbnRpMUBnbWFpbC5jb20iLCJpZF9yb2wiOjEsIm5vbWJyZSI6Ikl2byIsImlkX2VzdGFkbyI6MSwiaWF0IjoxNzYyMTIzNTIxLCJleHAiOjE3NjIxMjcxMjF9.T7ZPZj-uA9PMue5dUg1gamB9O1a8nC-BLXW4eaDB1uw
+Authorization: Bearer 
 Content-Type: application/json
 
 {
@@ -77,3 +77,7 @@ Content-Type: application/json
   "dia": 3,
   "orden": 2
 }
+###
+
+GET http://localhost:3001/api/routines/detail/1
+Authorization: Bearer 

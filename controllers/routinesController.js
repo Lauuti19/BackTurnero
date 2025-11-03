@@ -251,6 +251,32 @@ const removeExerciseFromRoutine = async (req, res) => {
   }
 };
 
+
+const getRoutineExercises = async (req, res) => {
+  const { id_rutina } = req.params;
+
+  try {
+    // ejecutamos el procedimiento almacenado
+    const results = await sequelize.query(
+      "CALL GetRoutineExercises(:id_rutina)",
+      {
+        replacements: { id_rutina },
+      }
+    );
+
+    // aseguramos que sea un array
+    const data = Array.isArray(results) ? results : [results];
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error getting routine:", error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || "Internal server error",
+    });
+  }
+};
+
+
 module.exports = {
   createRoutineTemplateWithExercises,
   assignRoutineToUser,
@@ -261,4 +287,6 @@ module.exports = {
   setRoutineActive,
   addExerciseToRoutine,
   removeExerciseFromRoutine,
+  getRoutineExercises
+
 };
