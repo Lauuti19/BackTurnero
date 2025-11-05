@@ -76,7 +76,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjo3L
 }
 
 ### DESINSCRIBIR de clase NORMAL
-POST http://localhost:3001/classes/unregister
+POST https://backturnero-vvk6.onrender.com/classes/unregister
 Content-Type: application/json
 Authorization: Bearer  
 

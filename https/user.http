@@ -16,8 +16,8 @@ PUT http://localhost:3001/api/auth/update-password
 Content-Type: application/json
 
 {
-  "id_usuario": 4,
-  "nuevaPassword": "1234567"
+  "id_usuario": 11,
+  "nuevaPassword": ""
 }
 
 ### Actualizar datos de un usuario
