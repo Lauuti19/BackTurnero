@@ -45,6 +45,10 @@ app.use('/api/workhours', workHoursRoutes);
 app.use('/api/liquidaciones', liquidacionesRoutes);
 app.use('/api/cash', cashAccionesRoutes);
 app.use('/api/deudas', deudasRoutes);
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ ok: true, message: 'Servidor despierto y funcionando' });
+});
+
 
 sequelize.sync()
     .then(() => {
