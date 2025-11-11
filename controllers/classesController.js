@@ -365,6 +365,99 @@ const registerIndividualAttendance = async (req, res) => {
     });
   }
 };
+const createSpecialClass = async (req, res) => {
+  const { fecha, id_disciplina, hora, capacidad_max, descripcion } = req.body;
+
+  if (!fecha || !id_disciplina || !hora || !capacidad_max) {
+    return res.status(400).json({
+      error: "Faltan parámetros: fecha, id_disciplina, hora y capacidad_max son obligatorios.",
+    });
+  }
+
+  try {
+    await sequelize.query(
+      "CALL CreateClaseEspecial(:fecha, :id_disciplina, :hora, :capacidad_max, :descripcion)",
+      {
+        replacements: { fecha, id_disciplina, hora, capacidad_max, descripcion },
+      }
+    );
+    res.status(201).json({ message: "Clase especial creada exitosamente." });
+  } catch (error) {
+    console.error("Error al crear clase especial:", error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || "Error interno del servidor",
+    });
+  }
+};
+const updateSpecialClass = async (req, res) => {
+  const {
+    id_clase_especial,
+    fecha,
+    id_disciplina,
+    hora,
+    capacidad_max,
+    descripcion,
+    activa,
+  } = req.body;
+
+  if (!id_clase_especial) {
+    return res.status(400).json({
+      error: "El parámetro id_clase_especial es obligatorio.",
+    });
+  }
+
+  try {
+    await sequelize.query(
+      "CALL UpdateClaseEspecial(:id_clase_especial, :fecha, :id_disciplina, :hora, :capacidad_max, :descripcion, :activa)",
+      {
+        replacements: {
+          id_clase_especial,
+          fecha: fecha ?? null,
+          id_disciplina: id_disciplina ?? null,
+          hora: hora ?? null,
+          capacidad_max: capacidad_max ?? null,
+          descripcion: descripcion ?? null,
+          activa: typeof activa === "undefined" ? null : activa,
+        },
+      }
+    );
+
+    res.status(200).json({ message: "Clase especial actualizada correctamente." });
+  } catch (error) {
+    console.error("Error al actualizar clase especial:", error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || "Error interno del servidor",
+    });
+  }
+};
+
+const deleteSpecialClass = async (req, res) => {
+  const { id_clase_especial } = req.body;
+
+  if (!id_clase_especial) {
+    return res
+      .status(400)
+      .json({ error: "El parámetro id_clase_especial es obligatorio." });
+  }
+
+  try {
+    await sequelize.query(
+      "CALL DeleteClaseEspecial(:id_clase_especial)",
+      { replacements: { id_clase_especial } }
+    );
+
+    res
+      .status(200)
+      .json({ message: "Clase especial eliminada correctamente." });
+  } catch (error) {
+    console.error("Error al eliminar clase especial:", error);
+    res.status(500).json({
+      error: error.original?.sqlMessage || "Error interno del servidor",
+    });
+  }
+};
+
+
 
 module.exports = {
   // listados
@@ -378,6 +471,9 @@ module.exports = {
   createClass,
   updateClass,
   deleteClass,
+  createSpecialClass,
+  updateSpecialClass,
+  deleteSpecialClass,
 
   // inscripción / asistencia
   registerToClass,

@@ -28,6 +28,18 @@ Authorization: Bearer
   "hora": "18:00:00",
   "capacidad_max": 20
 }
+### Crear clase especial
+POST http://localhost:3001/api/classes/create-special
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "fecha": "2025-12-24",
+  "id_disciplina": 2,
+  "hora": "11:00:00",
+  "capacidad_max": 15,
+  "descripcion": "Clase especial navideña"
+}
 
 ### LISTAR clases del plantel por día (regular)
 GET http://localhost:3001/classes/by-day?id_dia=3
@@ -52,6 +64,31 @@ Authorization: Bearer
 {
   "classId": 12
 }
+
+### Update special class
+PUT http://localhost:3001/api/classes/update-special
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "id_clase_especial": 3,
+  "fecha": "2025-12-25",
+  "id_disciplina": 1,
+  "hora": "11:00:00",
+  "capacidad_max": 20,
+  "descripcion": "Navidad - horario extendido",
+  "activa": 1
+}
+
+### Delete special class
+PUT http://localhost:3001/api/classes/delete-special
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "id_clase_especial": 3
+}
+
 
 ### REGISTRAR en clase NORMAL
 POST http://localhost:3001/api/classes/register

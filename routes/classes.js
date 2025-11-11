@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits, updateAttendance, checkAttendanceQR,registerIndividualAttendance} = require('../controllers/classesController');
+const { getClassesByUser, getAllClasses, registerToClass,getUsersByClassAndDate, unregisterFromClass, createClass, getClassesByDay, updateClass, deleteClass, getClassesByUserNoCredits, updateAttendance, checkAttendanceQR,registerIndividualAttendance, createSpecialClass,updateSpecialClass, deleteSpecialClass} = require('../controllers/classesController');
 const { authorizeRole } = require('../middlewares/authMiddleware');
 const { authenticateToken } = require('../middlewares/authenticateToken');
 
@@ -14,6 +14,13 @@ router.post('/register',authenticateToken, registerToClass);
 router.get('/users-by-class',authenticateToken, getUsersByClassAndDate),
 
 router.post('/unregister',authenticateToken, unregisterFromClass);
+
+router.post(
+  '/create-special',
+  authenticateToken,
+  authorizeRole(['admin','profesor']),
+  createSpecialClass
+);
 
 router.post('/create',authenticateToken, authorizeRole(['admin','profesor']), createClass);
 
@@ -34,6 +41,18 @@ router.put(
 
 router.post('/check', authenticateToken, checkAttendanceQR);
 router.put('/register-attendance', authenticateToken, registerIndividualAttendance);
+router.put(
+  '/update-special',
+  authenticateToken,
+  authorizeRole(['admin', 'profesor']),
+  updateSpecialClass
+);
 
+router.put(
+  '/delete-special',
+  authenticateToken,
+  authorizeRole(['admin', 'profesor']),
+  deleteSpecialClass
+);
 
 module.exports = router;
