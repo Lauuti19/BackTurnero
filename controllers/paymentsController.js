@@ -253,35 +253,36 @@ const mpWebhook = async (req, res) => {
 
     if (external_reference) {
       await sequelize.query(
-        `
-        UPDATE mp_pagos
-        SET
-          mp_payment_id = :mp_payment_id,
-          status = :status,
-          status_detail = :status_detail,
-          payment_method_id = :payment_method_id,
-          payment_type_id = :payment_type_id,
-          date_created = :date_created,
-          date_approved = :date_approved,
-          raw_notification = CAST(:raw_notification AS JSON),
-          raw_payment = CAST(:raw_payment AS JSON)
-        WHERE external_reference = :external_reference
-        `,
-        {
-          replacements: {
-            external_reference,
-            mp_payment_id: paymentId,
-            status,
-            status_detail,
-            payment_method_id: pay?.payment_method_id || null,
-            payment_type_id: pay?.payment_type_id || null,
-            date_created: pay?.date_created ? new Date(pay.date_created) : null,
-            date_approved: pay?.date_approved ? new Date(pay.date_approved) : null,
-            raw_notification: JSON.stringify(req.body || {}),
-            raw_payment: JSON.stringify(pay || {}),
-          }
-        }
-      );
+  `
+  UPDATE mp_pagos
+  SET
+    mp_payment_id = :mp_payment_id,
+    status = :status,
+    status_detail = :status_detail,
+    payment_method_id = :payment_method_id,
+    payment_type_id = :payment_type_id,
+    date_created = :date_created,
+    date_approved = :date_approved,
+    raw_notification = :raw_notification,
+    raw_payment = :raw_payment
+  WHERE external_reference = :external_reference
+  `,
+  {
+    replacements: {
+      external_reference,
+      mp_payment_id: paymentId,
+      status,
+      status_detail,
+      payment_method_id: pay?.payment_method_id || null,
+      payment_type_id: pay?.payment_type_id || null,
+      date_created: pay?.date_created ? new Date(pay.date_created) : null,
+      date_approved: pay?.date_approved ? new Date(pay.date_approved) : null,
+      raw_notification: JSON.stringify(req.body || req.query || {}),
+      raw_payment: JSON.stringify(pay || {}),
+    }
+  }
+);
+
     }
 
     if (status === 'approved' && external_reference) {
