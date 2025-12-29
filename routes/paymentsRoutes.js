@@ -1,24 +1,33 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const {
-  getActiveFees,
-  registerFee,
-  payFee,
-  createMpPreference,
-  mpWebhook,
-} = require('../controllers/paymentsController');
+const { getActiveFees, registerFee, payFee } = require("../controllers/paymentsController");
 
-const { authenticateToken } = require('../middlewares/authenticateToken');
-const { authorizeRole } = require('../middlewares/authMiddleware');
+// 👇 IMPORTS CORRECTOS (porque exportás objetos)
+const { authenticateToken } = require("../middlewares/authenticateToken");
+const { authorizeRole } = require("../middlewares/authMiddleware");
 
-router.get('/active-fees', authenticateToken, getActiveFees);
+// Alumno/Admin/Profesor ven cuotas (en tu controller, alumno usa id del token)
+router.get(
+  "/active-fees",
+  authenticateToken,
+  authorizeRole(["alumno", "admin", "profesor"]),
+  getActiveFees
+);
 
-router.post('/register-fee', authenticateToken, authorizeRole(['admin','profesor']), registerFee);
-router.post('/pay-fee', authenticateToken, authorizeRole(['admin','profesor']), payFee);
+// Manual (admin / profesor)
+router.post(
+  "/register-fee",
+  authenticateToken,
+  authorizeRole(["admin", "profesor"]),
+  registerFee
+);
 
-router.post('/mp/preference', authenticateToken, authorizeRole(['alumno']), createMpPreference);
-
-router.post('/mp/webhook', mpWebhook);
+router.post(
+  "/pay-fee",
+  authenticateToken,
+  authorizeRole(["admin", "profesor"]),
+  payFee
+);
 
 module.exports = router;

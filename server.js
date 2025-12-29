@@ -17,6 +17,7 @@ const workHoursRoutes = require('./routes/workHoursRoutes')
 const liquidacionesRoutes = require('./routes/liquidacionesRoutes')
 const cashAccionesRoutes = require('./routes/cashAccionesRoutes')
 const deudasRoutes = require('./routes/deudasRoutes')
+const mpPaymentsRoutes = require("./routes/mpPaymentsRoutes");
 
 const sequelize = require('./config/database');
 
@@ -45,6 +46,8 @@ app.use('/api/workhours', workHoursRoutes);
 app.use('/api/liquidaciones', liquidacionesRoutes);
 app.use('/api/cash', cashAccionesRoutes);
 app.use('/api/deudas', deudasRoutes);
+app.use("/api/mp", mpPaymentsRoutes);
+
 app.get('/api/health', (req, res) => {
     res.status(200).json({ ok: true, message: 'Servidor despierto y funcionando' });
 });
