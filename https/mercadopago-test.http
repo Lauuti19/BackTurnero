@@ -1,0 +1,18 @@
+### LOGIN ALUMNO
+POST https://backturnero-vvk6.onrender.com/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "agusf@gmail.com",
+  "password": "DrakkarDemo25."
+}
+
+
+### CREAR PREFERENCE MP (ALUMNO)
+POST https://backturnero-vvk6.onrender.com/api/payments/mp/preference
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoxMCwiZW1haWwiOiJhZ3VzZkBnbWFpbC5jb20iLCJpZF9yb2wiOjMsIm5vbWJyZSI6IkFndXN0aW4gRmVybmFuZGV6IiwiaWRfZXN0YWRvIjoyLCJpYXQiOjE3NjcwMzU5NzMsImV4cCI6MTc2NzAzOTU3M30.U11UBRVrsnvwuNz1m_R733Nels9rJf5D8QHZih8j-sY
+Content-Type: application/json
+
+{
+  "id_cuota": 12
+}
