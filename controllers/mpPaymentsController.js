@@ -250,7 +250,7 @@ const createMpPreferenceByPlan = async (req, res) => {
       preference_id: pref?.id || null,
       init_point: pref?.init_point || null,
     });
-  } } catch (error) {
+  } catch (error) {
   console.error("Error createMpPreferenceByPlan:", error);
 
   if (error?.code === "ER_SIGNAL_EXCEPTION" || error?.sqlState === "45000") {
