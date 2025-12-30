@@ -250,15 +250,21 @@ const createMpPreferenceByPlan = async (req, res) => {
       preference_id: pref?.id || null,
       init_point: pref?.init_point || null,
     });
-  } catch (error) {
-    console.error("Error createMpPreferenceByPlan:", error);
-    return res.status(500).json({ error: "Error interno del servidor." });
+  } } catch (error) {
+  console.error("Error createMpPreferenceByPlan:", error);
+
+  if (error?.code === "ER_SIGNAL_EXCEPTION" || error?.sqlState === "45000") {
+    return res.status(400).json({
+      error: error?.sqlMessage || "No se pudo crear la cuota.",
+      code: error?.code || "BUSINESS_RULE",
+    });
   }
+
+  return res.status(500).json({ error: "Error interno del servidor." });
+}
+
 };
 
-/**
- * Webhook: guarda auditoría + si approved => ConfirmMpPayment (acredita créditos + caja)
- */
 const mpWebhook = async (req, res) => {
   try {
     const paymentId = req.body?.data?.id || req.query?.["data.id"];
