@@ -253,17 +253,19 @@ const createMpPreferenceByPlan = async (req, res) => {
   } catch (error) {
   console.error("Error createMpPreferenceByPlan:", error);
 
-  if (error?.code === "ER_SIGNAL_EXCEPTION" || error?.sqlState === "45000") {
+  const dbErr = error?.original || error?.parent || error; // ✅ clave
+
+  if (dbErr?.code === "ER_SIGNAL_EXCEPTION" || dbErr?.sqlState === "45000") {
     return res.status(400).json({
-      error: error?.sqlMessage || "No se pudo crear la cuota.",
-      code: error?.code || "BUSINESS_RULE",
+      error: dbErr?.sqlMessage || "No se pudo crear la cuota.",
+      code: dbErr?.code || "BUSINESS_RULE",
     });
   }
 
   return res.status(500).json({ error: "Error interno del servidor." });
 }
+}
 
-};
 
 const mpWebhook = async (req, res) => {
   try {
